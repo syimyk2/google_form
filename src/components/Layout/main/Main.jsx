@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import QuizeBuilder from '../QuizeBuilder'
+import QuizeBuilder from '../../QuizeBuilder'
 import QuizeHeaderBuilder from './QuizeHeaderBuilder'
 
 const Main = () => {

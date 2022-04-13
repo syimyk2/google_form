@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import logo from '../../assets/img/logo.svg'
+import logo from '../../../assets/icon/logo.svg'
 import {BiPalette} from 'react-icons/bi'
 import {FiEye} from 'react-icons/fi'
 import {CgProfile} from 'react-icons/cg'
