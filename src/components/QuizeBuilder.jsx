@@ -1,5 +1,5 @@
 import React from 'react'
-import { Indicate } from './Layout/QuizeHeaderBuilder'
+import { Indicate } from './Layout/main/QuizeHeaderBuilder'
 import styled from 'styled-components'
 import {MdOutlineImage}from 'react-icons/md'
 import {MdClose}from 'react-icons/md'

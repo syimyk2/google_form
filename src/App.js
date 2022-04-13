@@ -1,12 +1,10 @@
 import React from "react";
-import Header from "./components/Layout/Header";
-import Main from "./components/Layout/Main";
+import Forms from "./components/pages/Forms";
 
 function App() {
   return (
     <>
-    <Header/>
-    <Main/>
+    <Forms/>
     </>
   )
 }
