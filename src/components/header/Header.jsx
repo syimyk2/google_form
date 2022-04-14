@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import logo from '../../../assets/icon/logo.svg'
+import logo from '../../assets/icon/logo.svg'
 import {BiPalette} from 'react-icons/bi'
 import {FiEye} from 'react-icons/fi'
 import {CgProfile} from 'react-icons/cg'
@@ -42,7 +42,7 @@ const HeaderWrapper = styled.header`
  background: white;
  border-bottom: 0.3px solid #d2cbdd;
  position: relative;
- z-index: 15;
+ z-index: 1;
  .icon{
    font-size: 25px;
    color: #787575e9;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Fragment } from 'react'
-import Header from '../Layout/header/Header'
-import Main from '../Layout/main/Main'
+import Header from '../header/Header'
+import Main from '../main/Main'
 
 const Forms = () => {
   return (

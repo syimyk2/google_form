@@ -3,15 +3,14 @@ import { Indicate } from './QuizeHeaderBuilder'
 import styled from 'styled-components'
 import QuizeForm from './QuizeForm'
 import QuizeBuilderFooter from './QuizeBuilderFooter'
-import QuizeAnswers from './QuizeAnswers'
 
 const QuizeBuilder = () => {
+  
   return (
     <QuizeWrapper>
         <Indicate/>
             <div>
                 <QuizeForm/>
-                <QuizeAnswers/>
                 <QuizeBuilderFooter/>
             </div>
     </QuizeWrapper>

@@ -1,23 +1,30 @@
 import React from 'react'
+import QuizeAnswers from './QuizeAnswers'
 import {MdOutlineImage}from 'react-icons/md'
 import styled from 'styled-components'
 import Select from './Select'
+import { useSelector } from 'react-redux'
 
 
 const QuizeForm = () => {
-   
+    const {selectedSetting, showSelectModal} = useSelector((state)=>state.form)
+
   return (
-    <BuilderForm>
+      <>
+       <BuilderForm>
             <form action="">
                 <input type="text" />
                 <span className="highlight"></span>
                 <span className="bar"></span>
             </form>
             <MdOutlineImage className='icon-img' />
-            <Select/>
+            <Select selectedSetting={selectedSetting} showSelectModal={showSelectModal}/>
              
             
     </BuilderForm>
+    <QuizeAnswers selectedSetting={selectedSetting}/>
+      </>
+   
   )
 }
 

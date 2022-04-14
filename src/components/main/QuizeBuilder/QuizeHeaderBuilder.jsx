@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import FlexBox from '../../../UI/Flexbox'
+import FlexBox from '../../UI/Flexbox'
 
 export const QuizeHeaderBuilder = () => {
   return (

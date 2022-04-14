@@ -1,24 +1,41 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import ReactDOM  from 'react-dom'
 import {MdOutlineRadioButtonChecked,MdDateRange,MdAccessTime,MdOutlineEmail} from 'react-icons/md'
 import {FaCheckSquare} from 'react-icons/fa'
+import { useDispatch } from 'react-redux'
+import { FormActions } from '../../../store/FormSlice'
+import email from '../../../assets/icon/email.svg'
+import time from '../../../assets/icon/time.svg'
+import date from '../../../assets/icon/date.svg'
+import check from '../../../assets/icon/check.svg'
+import radio from '../../../assets/icon/radio.svg'
+
 export const ANSWER_SETTINGS =[
-  {title: 'Один из списка', icon: <MdOutlineRadioButtonChecked fontSize={25} color={'grey'}/>, id: Math.random().toString()},
-  {title: 'Несколько из списка', icon: <FaCheckSquare fontSize={25} color={'grey'}/>, id: Math.random().toString()},
-  {title: 'Дата', icon: <MdDateRange fontSize={25} color={'grey'}/>, id: Math.random().toString()},
-  {title: 'Время', icon: <MdAccessTime fontSize={25} color={'grey'}/>, id: Math.random().toString()},
-  {title: 'Электронная почта', icon: <MdOutlineEmail fontSize={25} color={'grey'}/>, id: Math.random().toString()}
+  {title: 'Один из списка', icon: radio , id: 'i1'},
+  {title: 'Несколько из списка', icon: check , id: 'i2'},
+  {title: 'Дата', icon: date , id: 'i3'},
+  {title: 'Время', icon: time, id: 'i4'},
+  {title: 'Электронная почта', icon: email, id: 'i5'}
 
 ]
 
 
+
 const Modal = (props) => {
+  const dispatch = useDispatch()
+  const selectSettingHandler =(e)=>{ 
+    e.stopPropagation();
+    dispatch(FormActions.selectSetting(e.currentTarget.id))
    
+  }
+  useEffect(()=>{
+     dispatch(FormActions.addSettings(ANSWER_SETTINGS))
+  },[])
   return (
     <CardModalWrapper>
        <ul>
-         {ANSWER_SETTINGS.map((el)=><Item key={el.id}> {el.icon}<span>{el.title}</span></Item>)}
+         {ANSWER_SETTINGS.map((el)=><Item onClick={selectSettingHandler} id={el.id} key={el.id}><img src={el.icon} alt="ico" /><span>{el.title}</span></Item>)}
       </ul>
     </CardModalWrapper>
   )
@@ -59,13 +76,19 @@ background-color: #8080802a;
   span{
     padding-left:10px;
   }
-  
+  img{
+    width: 25px;
+  }
   
 `
 const Backdrop =(props)=>{
-  
+  const dispatch = useDispatch()
+   const closeHandler =(e)=>{
+    e.stopPropagation();
+     dispatch(FormActions.showSelectModal(false))
+   }
 
-    return  <Backdropp onClick={props.onClick} />
+    return  <Backdropp onClick={closeHandler} />
 }
   const Backdropp = styled.div`
    position: fixed;
@@ -83,7 +106,7 @@ const Backdrop =(props)=>{
    return <>
 
     {ReactDOM.createPortal(
-        <Modal > {props.children}</Modal>,
+        <Modal onClose={props.onClose} > {props.children}</Modal>,
         document.getElementById('modal-root')
     )},
      {ReactDOM.createPortal(
