@@ -1,26 +1,27 @@
 import React from 'react'
 import styled from 'styled-components'
+import FlexBox from '../../../UI/Flexbox'
 
-const QuizeHeaderBuilder = () => {
+export const QuizeHeaderBuilder = () => {
   return (
     <QuizeWrapper>
         <HeadIndicate/>
-        <QuizeHeaderBuilderForm>
+        <FlexBox>
             <Indicate/>
              <QuizeBuilderForm>
                  <div>
-                     <textarea className='big-textarea'value='new form' name="new-form" id="" />
+                     <textarea className='big-textarea' name="new-form" id="" />
                      <span className="highlight"></span>
                      <span className="bar"></span>
                  </div>
                  <div>
-                    <textarea className='little-textarea' value='description' name="description" id=""/>
+                    <textarea className='little-textarea'  name="description" id=""/>
                     <span className="highlight"></span>
                      <span className="bar"></span>
                  </div>
              </QuizeBuilderForm>
            
-        </QuizeHeaderBuilderForm>
+        </FlexBox>
         
         
     </QuizeWrapper>
@@ -28,7 +29,7 @@ const QuizeHeaderBuilder = () => {
 }
 const QuizeWrapper = styled.div`
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     width: 700px;
     margin: 0 auto;
     border-radius: 8px;
@@ -37,14 +38,14 @@ const QuizeWrapper = styled.div`
 `
 export const Indicate = styled.div`
     padding: 3px;
-    position:relative;
+    position: relative;
     z-index: 1;
     background-color: #3389f2f4;
   
     `
 const HeadIndicate = styled.div`
     padding: 5px;
-    position:relative;
+    position: relative;
     z-index: 2;
     background-color: #4910ab;
   
@@ -56,32 +57,31 @@ const QuizeBuilderForm = styled.form`
     padding-bottom: 24px;
     div{
         padding-left: 20px;
-        
-    }
+        }
     & textarea{
         overflow: auto;
         resize: none;
         font-size: 40px;
         -moz-appearance: none;
-        font-size:18px;
-        padding:10px 10px 10px 0px;
-        display:block;
-        width:665px;
-        border:none;
-        border-bottom:1px solid #b2aaaae7;
+        font-size: 18px;
+        padding: 10px 10px 10px 0px;
+        display: block;
+        width: 665px;
+        border: none;
+        border-bottom: 1px solid #b2aaaae7;
         &:focus{
             outline: none;
         }
        
             }
 
-       & .bar { position:relative; display:block; width:665px; }
+       & .bar { position:relative; display: block; width: 665px; }
         & .bar:before, .bar:after{
         content:'';
-        height:1.5px; 
-        width:0;
-        bottom:1px; 
-        position:absolute;
+        height: 1.5px; 
+        width: 0;
+        bottom: 1px; 
+        position: absolute;
         background: #611dd6; 
         transition:0.2s ease all; 
         -moz-transition:0.2s ease all; 
@@ -133,10 +133,6 @@ const QuizeBuilderForm = styled.form`
     }
 
 `
-const QuizeHeaderBuilderForm = styled.div`
-display: flex;
 
-    
-`
 
 export default QuizeHeaderBuilder

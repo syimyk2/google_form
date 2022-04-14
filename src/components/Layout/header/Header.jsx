@@ -41,6 +41,8 @@ const HeaderWrapper = styled.header`
  padding-top: 10px;
  background: white;
  border-bottom: 0.3px solid #d2cbdd;
+ position: relative;
+ z-index: 15;
  .icon{
    font-size: 25px;
    color: #787575e9;
