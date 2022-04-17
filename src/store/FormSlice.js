@@ -1,29 +1,117 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {
+  getFromLocalStorage,
+  saveToLocalStorage,
+} from "../utils/helpers/storageHelper";
+
 const initialState = {
-  form: {},
-  answersData: {},
+  quize: {},
+  quizeForms: [],
   answersSettings: [],
-  selectedSetting: {},
-  showSelectModal : false,
 };
 
 export const FormSlice = createSlice({
   name: "form",
   initialState: initialState,
   reducers: {
-    selectSetting(state, actions) {
-      let id = actions.payload;
-      
-      const selectedItem = state.answersSettings.find((el) => el.id === id);
-      state.selectedSetting = selectedItem
-      state.showSelectModal = false
+    // -----quize form title and descriptions action --------
+    saveQuizTitileAndDescription(state, action) {
+      const { quizTitleValue, quizDescriptionValue } = action.payload;
+      state.quize.quizTitle = quizTitleValue;
+      state.quize.quizDescription = quizDescriptionValue;
     },
-    addSettings(state,actions){
-      state.answersSettings =[...actions.payload] 
+    saveQuizData(state, actions) {
+      state.quize.quizeForms = state.quizeForms;
     },
-    showSelectModal(state, actions){
-      state.showSelectModal = actions.payload
-    }
+
+    // ---------forms actions-----
+    addQuizForm(state, actions) {
+      state.quizeForms = [
+        ...state.quizeForms,
+        {
+          ...actions.payload,
+          answerItems: [{ id: Math.random().toString() }],
+        },
+      ];
+    },
+    deleteQuizForm(state, actions) {
+      let formId = actions.payload;
+      let index = state.quizeForms.findIndex((el) => el.id === formId);
+      state.quizeForms.splice(index, 1);
+    },
+    duplicateQuizForm(state, actions) {
+      let formId = actions.payload;
+      let focusedFormItem = [...state.quizeForms].find(
+        (quizeForm) => quizeForm.id === formId
+      );
+      let index = state.quizeForms.findIndex((el) => el.id === formId);
+      state.quizeForms.splice(index + 1, 0, {
+        ...focusedFormItem,
+        id: Math.random().toString(),
+      });
+    },
+    addFormQuestion(state, actions) {
+      let { formId, questionValue } = actions.payload;
+      state.quizeForms.map((quizeForm) => {
+        if (quizeForm.id === formId) {
+          quizeForm.question = questionValue;
+        }
+        return quizeForm;
+      });
+    },
+    selectTypeOfQuestion(state, actions) {
+      let { selectedType, quizeFormId } = actions.payload;
+      state.quizeForms.map((quizeForm) => {
+        if (quizeForm.id === quizeFormId) {
+          quizeForm.typeOfQuestion = selectedType.title;
+        }
+        return quizeForm;
+      });
+    },
+    setQuestionImportant(state, actions) {
+      let formId = actions.payload;
+      state.quizeForms.map((quizeForm) => {
+        if (quizeForm.id === formId) {
+          quizeForm.isQuestionImportant = !quizeForm.isQuestionImportant;
+        }
+        return quizeForm;
+      });
+    },
+
+    // -----------question variants actions ------------
+    addVariants(state, actions) {
+      let { formId, quizeVariants } = actions.payload;
+      state.quizeForms.map((quizeForm) => {
+        if (quizeForm.id === formId) {
+          quizeForm.answerItems.push({
+            ...quizeVariants,
+            count: quizeForm.answerItems.length + 1,
+          });
+        }
+        return quizeForm;
+      });
+    },
+    deleteVariants(state, actions) {
+      let { formId, itemId } = actions.payload;
+      let focusedFormItem = state.quizeForms.find((el) => el.id === formId);
+      let index = focusedFormItem.answerItems.findIndex(
+        (el) => el.id === itemId
+      );
+      focusedFormItem.answerItems.splice(index, 1);
+    },
+    saveVariantsValue(state, actions) {
+      let { formId, itemId, variantValue } = actions.payload;
+      let focusedFormItem = state.quizeForms.find((el) => el.id === formId);
+      focusedFormItem.answerItems.map((el) => {
+        if (el.id === itemId) {
+          el.variantValue = variantValue;
+        }
+        return el;
+      });
+    },
+    addSettings(state, actions) {
+      state.answersSettings = [...actions.payload];
+    },
   },
 });
 
