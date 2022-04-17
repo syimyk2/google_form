@@ -1,10 +1,9 @@
-import React from "react";
-import Forms from "./components/pages/Forms";
+import Forms from './components/pages/Forms';
 
 function App() {
   return (
     <>
-    <Forms/>
+    <Forms/>;
     </>
   )
 }
