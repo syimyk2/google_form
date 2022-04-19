@@ -23,6 +23,7 @@ const QuizeBuilder = ({  quizeFormId, quizeFormAnswerItems, isQuestionImportant,
     </QuizeWrapper>
   );
 };
+export default QuizeBuilder;
 
 const QuizeWrapper = styled.div`
   display: flex;
@@ -39,4 +40,4 @@ const QuizeWrapper = styled.div`
   }
 `;
 
-export default QuizeBuilder;
+

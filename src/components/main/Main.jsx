@@ -19,7 +19,7 @@ const Main = () => {
             key={quizeForm.id}
             quizeFormId={quizeForm.id}
             quizeFormAnswerItems={quizeForm.answerItems}
-            isQuestionImportant ={quizeForm.isQuestionImportant}
+            isQuestionImportant={quizeForm.isQuestionImportant}
             typeOfQuestion={quizeForm.typeOfQuestion}
             question={quizeForm.question}
           />

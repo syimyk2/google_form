@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import QuizeAnswers from "./QuizeAnswers";
 import { MdOutlineImage } from "react-icons/md";
 import styled from "styled-components";
@@ -13,7 +13,7 @@ const QuizeForm = ({ quizeFormId, quizeFormAnswerItems, typeOfQuestion,question 
   const { enteredValue: questionValue, changeInputHandler: questionChange } =
     useInput();
 
-  //  -------------------------------------------------------------------
+  //  ---------------------------------------------------
 
   const saveQuestionValueHandler = (formId) => {
     console.log(formId, questionValue);

@@ -1,25 +1,25 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
-const VariantAdder = ({onClick, type, className, id}) => {
+const VariantAdder = ({ onClick, type, className, id }) => {
   return (
     <AnswerAdder>
-    <form action="" onClick={()=>onClick(id)} >
-      <input disabled={true} type={type? type : 'radio'}  id="" />
-      <input
-        className="input"
-        type="text"
-        disabled={true}
-        placeholder="Добавить вариант"
-      />
-    </form>
-    <span>или</span>
-    <span className="btn-other">добавить вариант "Другое"</span>
-  </AnswerAdder>
-  )
-}
+      <form action="" onClick={() => onClick(id)}>
+        <input disabled={true} type={type ? type : "radio"} id="" />
+        <input
+          className="input"
+          type="text"
+          disabled={true}
+          placeholder="Добавить вариант"
+        />
+      </form>
+      <span>или</span>
+      <span className="btn-other">добавить вариант "Другое"</span>
+    </AnswerAdder>
+  );
+};
 
-export default VariantAdder
+export default VariantAdder;
 
 const AnswerAdder = styled.div`
   display: flex;

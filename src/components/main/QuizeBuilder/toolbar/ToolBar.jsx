@@ -27,35 +27,33 @@ const StyledToolBar = styled.div`
   svg {
     width: 50px;
     color: #4d4949;
+    font-size: 22px;
+    cursor: pointer;
   }
   svg:hover {
     background-color: #80808038;
+    color: #32024d;
   }
 `;
 
 export const ToolBar = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const addNewQuestionForm = (e) => {
     const quizeForm = {
       id: Math.random().toString(),
       isQuestionImportant: false,
-      typeOfQuestion:  ANSWER_SETTINGS[0],
+      typeOfQuestion: ANSWER_SETTINGS[0],
     };
-    dispatch(FormActions.addQuizForm(quizeForm))
+    dispatch(FormActions.addQuizForm(quizeForm));
   };
   return (
     <StyledToolBar>
-      <AiOutlinePlusCircle
-        onClick={addNewQuestionForm}
-        size={26}
-        display={"block"}
-        cursor={"pointer"}
-      />
-      <AiOutlineImport size={26} display={"block"} cursor={"pointer"} />
-      <BiText size={26} display={"block"} cursor={"pointer"} />
-      <BsCardImage size={26} display={"block"} cursor={"pointer"} />
-      <AiOutlineVideoCameraAdd size={26} display={"block"} cursor={"pointer"} />
-      <GrChapterAdd size={26} display={"block"} cursor={"pointer"} />
+       <AiOutlinePlusCircle onClick={addNewQuestionForm} />
+       <AiOutlineImport />
+       <BiText />
+       <BsCardImage />
+       <AiOutlineVideoCameraAdd />
+       <GrChapterAdd />
     </StyledToolBar>
   );
 };

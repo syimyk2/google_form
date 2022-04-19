@@ -11,7 +11,16 @@ import radio from "../../../assets/icon/radio.svg";
 import text from "../../../assets/icon/text-icon.svg";
 import name from "../../../assets/icon/name.svg";
 import phone from "../../../assets/icon/phone.svg";
-import { DATE, EMAIL, NAME, NUMBER, ONEOFLIST, SOMEOFLIST, TEXT, TIME } from "../../../utils/constants/general";
+import {
+  DATE,
+  EMAIL,
+  NAME,
+  NUMBER,
+  ONEOFLIST,
+  SOMEOFLIST,
+  TEXT,
+  TIME,
+} from "../../../utils/constants/general";
 
 export const ANSWER_SETTINGS = [
   { id: "00i1", icon: radio, title: ONEOFLIST },
@@ -25,7 +34,7 @@ export const ANSWER_SETTINGS = [
 ];
 
 const Backdrop = (props) => {
-  return <Backdropp onClick={() => props.onClose} />;
+  return <Backdropp />;
 };
 
 const Modal = (props) => {
@@ -57,14 +66,14 @@ const SelectModal = (props) => {
   return (
     <>
       {ReactDOM.createPortal(
-        <Modal onClose={props.onClose} id={props.id} onSelect={props.onSelect}>
+        <Modal id={props.id} onSelect={props.onSelect}>
           {props.children}
         </Modal>,
         document.getElementById("modal-root")
       )}
       ,
       {ReactDOM.createPortal(
-        <Backdrop onClick={props.onClose} />,
+        <Backdrop />,
         document.getElementById("backdrop-root")
       )}
     </>

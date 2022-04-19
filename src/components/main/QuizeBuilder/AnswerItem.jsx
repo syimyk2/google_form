@@ -56,7 +56,7 @@ const AnswerItemWrapper = styled.div`
     font-size: 25px;
     color: #656262;
     cursor: pointer;
-    &:hover{
+    &:hover {
       color: #3d0789ef;
     }
   }

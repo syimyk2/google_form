@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { AiOutlineCaretDown } from "react-icons/ai";
-import SelectModal, { ANSWER_SETTINGS } from "./SelectModal";
+import SelectModal from "./SelectModal";
 import { useDispatch } from "react-redux";
 import { FormActions } from "../../../store/FormSlice";
 
 const Select = ({ quizeFormId, onSelected, typeOfQuestion }) => {
-  const dispatch = useDispatch();
   const [showSelectModal, setShowSelectModal] = useState(null);
 
   const selectSettingHandler = (selectedSetting) => {
@@ -15,23 +14,14 @@ const Select = ({ quizeFormId, onSelected, typeOfQuestion }) => {
   const showSelectHandler = () => {
     setShowSelectModal((prev) => !prev);
   };
-
-  const closeSelectHandler = (e) => {
-    dispatch(FormActions.showSelectModal(false));
-  };
+  let selectModal = showSelectModal && ( <SelectModal id={quizeFormId} onSelect={selectSettingHandler} />);
 
   return (
     <SelectWrapper onClick={showSelectHandler}>
       <div>
         <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
         <div id={quizeFormId}> {typeOfQuestion.title}</div>
-        {showSelectModal && (
-          <SelectModal
-            id={quizeFormId}
-            onClose={closeSelectHandler}
-            onSelect={selectSettingHandler}
-          />
-        )}
+        {selectModal}
       </div>
       <AiOutlineCaretDown color="gray" />
     </SelectWrapper>

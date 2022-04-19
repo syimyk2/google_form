@@ -5,9 +5,10 @@ import { FormActions } from "../../../store/FormSlice";
 import FlexBox from "../../UI/Flexbox";
 
 export const QuizeHeaderBuilder = () => {
+  const dispatch = useDispatch();
   const quiz = useSelector((state) => state.form.quize);
   console.log(quiz);
-  const dispatch = useDispatch();
+
   const QuizTitleRef = useRef();
   const QuizDescriptionRef = useRef();
 
@@ -55,6 +56,9 @@ export const QuizeHeaderBuilder = () => {
     </QuizeWrapper>
   );
 };
+
+export default QuizeHeaderBuilder;
+
 const QuizeWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -187,4 +191,4 @@ const QuizeBuilderForm = styled.form`
   }
 `;
 
-export default QuizeHeaderBuilder;
+
