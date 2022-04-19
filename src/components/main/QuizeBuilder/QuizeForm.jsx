@@ -3,17 +3,13 @@ import QuizeAnswers from "./QuizeAnswers";
 import { MdOutlineImage } from "react-icons/md";
 import styled from "styled-components";
 import Select from "./Select";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import useInput from "../../../hooks/useInput";
-import { saveToLocalStorage } from "../../../utils/helpers/storageHelper";
-import { ANSWER_SETTINGS } from "./SelectModal";
 import { FormActions } from "../../../store/FormSlice";
 
-const QuizeForm = ({ quizeFormId, quizeFormAnswerItems }) => {
+const QuizeForm = ({ quizeFormId, quizeFormAnswerItems, typeOfQuestion,question }) => {
   const dispatch = useDispatch();
-  const [selectedSettingsType, setSelectedSettingsType] = useState(
-    ANSWER_SETTINGS[0]
-  );
+
   const { enteredValue: questionValue, changeInputHandler: questionChange } =
     useInput();
 
@@ -25,8 +21,6 @@ const QuizeForm = ({ quizeFormId, quizeFormAnswerItems }) => {
   };
 
   const selectVariantsType = (selectedType) => {
-    setSelectedSettingsType(selectedType);
-
     dispatch(FormActions.selectTypeOfQuestion({ selectedType, quizeFormId }));
   };
 
@@ -35,21 +29,27 @@ const QuizeForm = ({ quizeFormId, quizeFormAnswerItems }) => {
       <BuilderForm>
         <div>
           <input
+            onFocus={(e) => e.target.select()}
             type="text"
             onChange={questionChange}
             onBlur={() => saveQuestionValueHandler(quizeFormId)}
-            value={questionChange.enteredValue}
+            defaultValue={question}
           />
           <span className="highlight"></span>
           <span className="bar"></span>
         </div>
         <MdOutlineImage className="icon-img" />
-        <Select quizeFormId={quizeFormId} onSelected={selectVariantsType} />
+        <Select
+          quizeFormId={quizeFormId}
+          typeOfQuestion={typeOfQuestion}
+          onSelected={selectVariantsType}
+        />
       </BuilderForm>
       <QuizeAnswers
-        selectedSetting={selectedSettingsType}
+        selectedSetting={typeOfQuestion}
         quizeFormId={quizeFormId}
         quizeFormAnswerItems={quizeFormAnswerItems}
+        typeOfQuestion={typeOfQuestion}
       />
     </>
   );

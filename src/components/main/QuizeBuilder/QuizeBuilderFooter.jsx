@@ -5,7 +5,6 @@ import { MdOutlineContentCopy } from "react-icons/md";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { FormActions } from "../../../store/FormSlice";
-import useInput from "../../../hooks/useInput";
 
 const QuizeBuilderFooter = ({ quizeFormId, isQuestionImportant }) => {
   const dispatch = useDispatch();
@@ -17,27 +16,23 @@ const QuizeBuilderFooter = ({ quizeFormId, isQuestionImportant }) => {
   const duplicateFormHandler = (formId) => {
     dispatch(FormActions.duplicateQuizForm(formId));
   };
-  const setQuestionImportantHandler =(formId)=>{
-    dispatch(FormActions.setQuestionImportant(formId))
-  }
+  const setQuestionImportantHandler = (formId) => {
+    dispatch(FormActions.setQuestionImportant(formId));
+  };
   return (
     <QuizeBuilderFooterOptions>
       <Icons>
         <MdOutlineContentCopy
           onClick={() => duplicateFormHandler(quizeFormId)}
-          fontSize={20}
         />
-        <RiDeleteBin6Line
-          onClick={() => deleteFormHandler(quizeFormId)}
-          fontSize={20}
-        />
+        <RiDeleteBin6Line onClick={() => deleteFormHandler(quizeFormId)} />
       </Icons>
       <div className="setting">
         <span className="span">Обязательный вопрос</span>
         <label className="checkbox-google">
           <input
             type="checkbox"
-            onChange={()=>setQuestionImportantHandler(quizeFormId)}
+            onChange={() => setQuestionImportantHandler(quizeFormId)}
             checked={isQuestionImportant}
           />
           <span className="checkbox-google-switch"></span>
@@ -55,6 +50,14 @@ const QuizeBuilderFooterOptions = styled.div`
   justify-content: flex-end;
   align-items: center;
   padding: 0 10px 25px 30px;
+  svg {
+    font-size: 20px;
+    color: #656262;
+    cursor: pointer;
+    &:hover {
+      color: #3d0789ef;
+    }
+  }
 
   .setting {
     width: 300px;

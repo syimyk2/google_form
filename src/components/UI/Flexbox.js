@@ -7,7 +7,7 @@ flex-direction: ${props => props.direction || 'row'};
 align-items: ${props => props.align || 'stretch'};
 justify-content: ${props => props.justify || 'stretch'};
 margin:${({margin}) => margin || '0'} ;
-margin:${({height}) => height || ''} ;
+height:${({height}) => height || ''} ;
 `
 const FlexBox = (props) => {
     return <StyledFlex {...props} />

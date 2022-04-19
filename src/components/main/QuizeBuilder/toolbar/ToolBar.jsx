@@ -9,6 +9,7 @@ import { BsCardImage } from "react-icons/bs";
 import { GrChapterAdd } from "react-icons/gr";
 import { useDispatch } from "react-redux";
 import { FormActions } from "../../../../store/FormSlice";
+import { ANSWER_SETTINGS } from "../SelectModal";
 
 const StyledToolBar = styled.div`
   display: flex;
@@ -38,7 +39,7 @@ export const ToolBar = () => {
     const quizeForm = {
       id: Math.random().toString(),
       isQuestionImportant: false,
-      typeOfQuestion: 'Одно из списка'
+      typeOfQuestion:  ANSWER_SETTINGS[0],
     };
     dispatch(FormActions.addQuizForm(quizeForm))
   };

@@ -20,6 +20,8 @@ const Main = () => {
             quizeFormId={quizeForm.id}
             quizeFormAnswerItems={quizeForm.answerItems}
             isQuestionImportant ={quizeForm.isQuestionImportant}
+            typeOfQuestion={quizeForm.typeOfQuestion}
+            question={quizeForm.question}
           />
         ))}
       </Container>

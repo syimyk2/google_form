@@ -31,7 +31,6 @@ const Modal = (props) => {
   const dispatch = useDispatch();
   const selectSettingHandler = (selectedSetting) => {
     props.onSelect(selectedSetting);
-    
   };
   useEffect(() => {
     dispatch(FormActions.addSettings(ANSWER_SETTINGS));
