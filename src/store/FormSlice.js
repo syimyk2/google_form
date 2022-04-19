@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { SOMEOFLIST } from "../utils/constants/general";
 import {
   getFromLocalStorage,
   saveToLocalStorage,
@@ -49,7 +50,6 @@ export const FormSlice = createSlice({
         ...focusedFormItem,
         id: Math.random().toString(),
       });
-      console.log(newArray);
     },
     addFormQuestion(state, actions) {
       let { formId, questionValue } = actions.payload;
@@ -65,9 +65,9 @@ export const FormSlice = createSlice({
       state.quizeForms.map((quizeForm) => {
         if (quizeForm.id === quizeFormId) {
           quizeForm.typeOfQuestion = selectedType;
-          quizeForm.answerItems.map((el)=>{
-            el.isVariantCorrect = false
-          })
+          quizeForm.answerItems.map((el) => {
+            el.isVariantCorrect = false;
+          });
         }
         return quizeForm;
       });
@@ -116,9 +116,8 @@ export const FormSlice = createSlice({
     selectVariantAsAcorrect(state, actions) {
       let { formId, itemId } = actions.payload;
       let focusedFormItem = state.quizeForms.find((el) => el.id === formId);
-       
-      if (focusedFormItem.typeOfQuestion.title === "Несколько из списка") {
-       
+
+      if (focusedFormItem.typeOfQuestion.title === SOMEOFLIST) {
         focusedFormItem.answerItems.map((el) => {
           if (el.id === itemId) {
             el.isVariantCorrect = !el.isVariantCorrect;

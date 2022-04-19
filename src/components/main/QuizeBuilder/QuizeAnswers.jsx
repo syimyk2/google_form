@@ -1,12 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { MdOutlineImage, MdClose, MdDateRange } from "react-icons/md";
+import { MdDateRange } from "react-icons/md";
 import { IoMdTime } from "react-icons/io";
 import useInput from "../../../hooks/useInput";
 import { useDispatch } from "react-redux";
 import { FormActions } from "../../../store/FormSlice";
 import { Variant } from "./AnswerItem";
 import VariantAdder from "./VariantAdder";
+import {
+  DATE,
+  EMAIL,
+  NAME,
+  NUMBER,
+  SOMEOFLIST,
+  TEXT,
+  TIME,
+} from "../../../utils/constants/general";
 
 const QuizeAnswers = ({
   quizeFormId,
@@ -38,43 +47,50 @@ const QuizeAnswers = ({
     dispatch(FormActions.selectVariantAsAcorrect({ formId, itemId }));
   };
 
-  // ----------------Changeing answer form ---------------------
+  // ----------------Change answer form ---------------------
   let changebleForm;
 
-  if (typeOfQuestion.title === "Текст") {
+  if (typeOfQuestion.title === TEXT) {
     changebleForm = (
       <AnswerWithText>
         <span>Текстовый ответ</span>
       </AnswerWithText>
     );
-  } else if (typeOfQuestion.title === "Номер") {
+  } else if (typeOfQuestion.title === NUMBER) {
     changebleForm = (
       <AnswerWithDate>
         <span>{typeOfQuestion.title}</span>
-        <img src={typeOfQuestion.icon} alt="icon" />
+        <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
       </AnswerWithDate>
     );
-  } else if (typeOfQuestion.title === "Электронная почта") {
+  } else if (typeOfQuestion.title === EMAIL) {
     changebleForm = (
       <AnswerWithDate>
         <span>{typeOfQuestion.title}</span>
-        <img src={typeOfQuestion.icon} alt="icon" />
+        <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
       </AnswerWithDate>
     );
-  } else if (typeOfQuestion.title === "Время") {
+  } else if (typeOfQuestion.title === TIME) {
     changebleForm = (
       <AnswerWithDate>
         <span>{typeOfQuestion.title}</span> <IoMdTime fontSize={20} />
       </AnswerWithDate>
     );
-  } else if (typeOfQuestion.title === "Имя") {
+  } else if (typeOfQuestion.title === NAME) {
     changebleForm = (
       <AnswerWithDate>
-        <span>{typeOfQuestion.title}</span>{" "}
-        <img src={typeOfQuestion.icon} alt="icon" />
+        <span>{typeOfQuestion.title}</span>
+        <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
       </AnswerWithDate>
     );
-  } else if (typeOfQuestion.title === "Несколько из списка") {
+  } else if (typeOfQuestion.title === DATE) {
+    changebleForm = (
+      <AnswerWithDate>
+        <span>День, месяц, год</span>
+        <MdDateRange fontSize="20px" color="grey" />
+      </AnswerWithDate>
+    );
+  } else if (typeOfQuestion.title === SOMEOFLIST) {
     changebleForm = (
       <>
         {quizeFormAnswerItems.map((quizeFormAnswerItem) => (
@@ -100,13 +116,6 @@ const QuizeAnswers = ({
           id={quizeFormId}
         />
       </>
-    );
-  } else if (typeOfQuestion.title === "Дата") {
-    changebleForm = (
-      <AnswerWithDate>
-        <span>День, месяц, год</span>
-        <MdDateRange fontSize="20px" color="grey" />
-      </AnswerWithDate>
     );
   } else {
     changebleForm = (

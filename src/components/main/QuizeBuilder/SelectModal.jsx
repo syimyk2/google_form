@@ -11,16 +11,17 @@ import radio from "../../../assets/icon/radio.svg";
 import text from "../../../assets/icon/text-icon.svg";
 import name from "../../../assets/icon/name.svg";
 import phone from "../../../assets/icon/phone.svg";
+import { DATE, EMAIL, NAME, NUMBER, ONEOFLIST, SOMEOFLIST, TEXT, TIME } from "../../../utils/constants/general";
 
 export const ANSWER_SETTINGS = [
-  { id: "00i1", icon: radio, title: "Один из списка" },
-  { id: "00i2", icon: check, title: "Несколько из списка" },
-  { id: "00i3", icon: date, title: "Дата" },
-  { id: "00i4", icon: time, title: "Время" },
-  { id: "00i85", icon: email, title: "Электронная почта" },
-  { id: "00i650", icon: text, title: "Текст" },
-  { id: "00i8701", icon: phone, title: "Номер" },
-  { id: "00i8601", icon: name, title: "Имя" },
+  { id: "00i1", icon: radio, title: ONEOFLIST },
+  { id: "00i2", icon: check, title: SOMEOFLIST },
+  { id: "00i3", icon: date, title: DATE },
+  { id: "00i4", icon: time, title: TIME },
+  { id: "00i85", icon: email, title: EMAIL },
+  { id: "00i650", icon: text, title: TEXT },
+  { id: "00i8701", icon: phone, title: NUMBER },
+  { id: "00i8601", icon: name, title: NAME },
 ];
 
 const Backdrop = (props) => {
