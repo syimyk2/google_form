@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import Header from '../header/Header'
 import Main from '../main/Main'
 
-const Forms = () => {
+const CreateForms = () => {
   return (
     <Fragment>
         <Header/>
@@ -12,4 +12,4 @@ const Forms = () => {
   )
 }
 
-export default Forms
+export default CreateForms

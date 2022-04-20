@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { SOMEOFLIST } from "../utils/constants/general";
 import {
   getFromLocalStorage,
   saveToLocalStorage,
@@ -45,7 +46,7 @@ export const FormSlice = createSlice({
         (quizeForm) => quizeForm.id === formId
       );
       let index = state.quizeForms.findIndex((el) => el.id === formId);
-      state.quizeForms.splice(index + 1, 0, {
+      const newArray = state.quizeForms.splice(index + 1, 0, {
         ...focusedFormItem,
         id: Math.random().toString(),
       });
@@ -63,7 +64,10 @@ export const FormSlice = createSlice({
       let { selectedType, quizeFormId } = actions.payload;
       state.quizeForms.map((quizeForm) => {
         if (quizeForm.id === quizeFormId) {
-          quizeForm.typeOfQuestion = selectedType.title;
+          quizeForm.typeOfQuestion = selectedType;
+          quizeForm.answerItems.map((el) => {
+            el.isVariantCorrect = false;
+          });
         }
         return quizeForm;
       });
@@ -108,6 +112,29 @@ export const FormSlice = createSlice({
         }
         return el;
       });
+    },
+    selectVariantAsAcorrect(state, actions) {
+      let { formId, itemId } = actions.payload;
+      let focusedFormItem = state.quizeForms.find((el) => el.id === formId);
+
+      if (focusedFormItem.typeOfQuestion.title === SOMEOFLIST) {
+        focusedFormItem.answerItems.map((el) => {
+          if (el.id === itemId) {
+            el.isVariantCorrect = !el.isVariantCorrect;
+          }
+
+          return el;
+        });
+      } else {
+        focusedFormItem.answerItems.map((el) => {
+          el.isVariantCorrect = false;
+          if (el.id === itemId) {
+            el.isVariantCorrect = !el.isVariantCorrect;
+          }
+
+          return el;
+        });
+      }
     },
     addSettings(state, actions) {
       state.answersSettings = [...actions.payload];

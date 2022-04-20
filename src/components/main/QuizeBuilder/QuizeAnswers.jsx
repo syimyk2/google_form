@@ -1,17 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { MdOutlineImage, MdClose, MdDateRange } from "react-icons/md";
+import { MdDateRange } from "react-icons/md";
 import { IoMdTime } from "react-icons/io";
 import useInput from "../../../hooks/useInput";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FormActions } from "../../../store/FormSlice";
 import { Variant } from "./AnswerItem";
 import VariantAdder from "./VariantAdder";
+import {
+  DATE,
+  EMAIL,
+  NAME,
+  NUMBER,
+  SOMEOFLIST,
+  TEXT,
+  TIME,
+} from "../../../utils/constants/general";
 
 const QuizeAnswers = ({
-  selectedSetting,
   quizeFormId,
   quizeFormAnswerItems,
+  typeOfQuestion,
 }) => {
   const dispatch = useDispatch();
 
@@ -21,6 +30,8 @@ const QuizeAnswers = ({
   const addVariantItemHandler = (formId) => {
     const quizeVariants = {
       id: Math.random().toString(),
+      variantValue: "",
+      isVariantCorrect: false,
     };
 
     dispatch(FormActions.addVariants({ quizeVariants, formId }));
@@ -30,47 +41,56 @@ const QuizeAnswers = ({
     dispatch(FormActions.deleteVariants({ formId, itemId }));
   };
   const saveVariantValueHandler = (formId, itemId) => {
-    console.log(variantValue);
     dispatch(FormActions.saveVariantsValue({ formId, itemId, variantValue }));
   };
+  const selctAsAcorrectVariantHandler = (formId, itemId) => {
+    dispatch(FormActions.selectVariantAsAcorrect({ formId, itemId }));
+  };
 
-  // ----------------Changeing answer form ---------------------
+  // ----------------Change answer form ---------------------
   let changebleForm;
 
-  if (selectedSetting.title === "Текст") {
+  if (typeOfQuestion.title === TEXT) {
     changebleForm = (
       <AnswerWithText>
         <span>Текстовый ответ</span>
       </AnswerWithText>
     );
-  } else if (selectedSetting.title === "Номер") {
+  } else if (typeOfQuestion.title === NUMBER) {
     changebleForm = (
       <AnswerWithDate>
-        <span>{selectedSetting.title}</span>
-        <img src={selectedSetting.icon} alt="icon" />
+        <span>{typeOfQuestion.title}</span>
+        <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
       </AnswerWithDate>
     );
-  } else if (selectedSetting.title === "Электронная почта") {
+  } else if (typeOfQuestion.title === EMAIL) {
     changebleForm = (
       <AnswerWithDate>
-        <span>{selectedSetting.title}</span>
-        <img src={selectedSetting.icon} alt="icon" />
+        <span>{typeOfQuestion.title}</span>
+        <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
       </AnswerWithDate>
     );
-  } else if (selectedSetting.title === "Время") {
+  } else if (typeOfQuestion.title === TIME) {
     changebleForm = (
       <AnswerWithDate>
-        <span>{selectedSetting.title}</span> <IoMdTime fontSize={20} />
+        <span>{typeOfQuestion.title}</span> <IoMdTime fontSize={20} />
       </AnswerWithDate>
     );
-  } else if (selectedSetting.title === "Имя") {
+  } else if (typeOfQuestion.title === NAME) {
     changebleForm = (
       <AnswerWithDate>
-        <span>{selectedSetting.title}</span>{" "}
-        <img src={selectedSetting.icon} alt="icon" />
+        <span>{typeOfQuestion.title}</span>
+        <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
       </AnswerWithDate>
     );
-  } else if (selectedSetting.title === "Несколько из списка") {
+  } else if (typeOfQuestion.title === DATE) {
+    changebleForm = (
+      <AnswerWithDate>
+        <span>День, месяц, год</span>
+        <MdDateRange fontSize="20px" color="grey" />
+      </AnswerWithDate>
+    );
+  } else if (typeOfQuestion.title === SOMEOFLIST) {
     changebleForm = (
       <>
         {quizeFormAnswerItems.map((quizeFormAnswerItem) => (
@@ -82,8 +102,11 @@ const QuizeAnswers = ({
             formId={quizeFormId}
             onChange={variantChange}
             value={variantValue}
+            defaultValue={quizeFormAnswerItem.variantValue}
             onBlur={saveVariantValueHandler}
             onDelete={deleteVariantItemHandler}
+            onChecked={selctAsAcorrectVariantHandler}
+            checked={quizeFormAnswerItem.isVariantCorrect}
           />
         ))}
 
@@ -93,13 +116,6 @@ const QuizeAnswers = ({
           id={quizeFormId}
         />
       </>
-    );
-  } else if (selectedSetting.title === "Дата") {
-    changebleForm = (
-      <AnswerWithDate>
-        <span>День, месяц, год</span>
-        <MdDateRange fontSize="20px" color="grey" />
-      </AnswerWithDate>
     );
   } else {
     changebleForm = (
@@ -111,10 +127,13 @@ const QuizeAnswers = ({
             placeholder={quizeFormAnswerItem.count}
             formId={quizeFormId}
             onChange={variantChange}
+            defaultValue={quizeFormAnswerItem.variantValue}
             value={variantValue}
             onBlur={saveVariantValueHandler}
             onDelete={deleteVariantItemHandler}
             type={"radio"}
+            onChecked={selctAsAcorrectVariantHandler}
+            checked={quizeFormAnswerItem.isVariantCorrect}
           />
         ))}
         <VariantAdder

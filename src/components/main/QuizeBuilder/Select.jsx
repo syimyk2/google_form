@@ -1,39 +1,27 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { AiOutlineCaretDown } from "react-icons/ai";
-import SelectModal, { ANSWER_SETTINGS } from "./SelectModal";
+import SelectModal from "./SelectModal";
 import { useDispatch } from "react-redux";
 import { FormActions } from "../../../store/FormSlice";
 
-const Select = ({ quizeFormId, onSelected }) => {
-  const dispatch = useDispatch();
+const Select = ({ quizeFormId, onSelected, typeOfQuestion }) => {
   const [showSelectModal, setShowSelectModal] = useState(null);
-  const [selectedSetting, setSelectedSetting] = useState(ANSWER_SETTINGS[0]);
 
   const selectSettingHandler = (selectedSetting) => {
-    setSelectedSetting(selectedSetting);
     onSelected(selectedSetting);
   };
   const showSelectHandler = () => {
     setShowSelectModal((prev) => !prev);
   };
-
-  const closeSelectHandler = (e) => {
-    dispatch(FormActions.showSelectModal(false));
-  };
+  let selectModal = showSelectModal && ( <SelectModal id={quizeFormId} onSelect={selectSettingHandler} />);
 
   return (
     <SelectWrapper onClick={showSelectHandler}>
       <div>
-        <img src={selectedSetting.icon} alt={selectedSetting.title} />
-        <div id={quizeFormId}> {selectedSetting.title}</div>
-        {showSelectModal && (
-          <SelectModal
-            id={quizeFormId}
-            onClose={closeSelectHandler}
-            onSelect={selectSettingHandler}
-          />
-        )}
+        <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
+        <div id={quizeFormId}> {typeOfQuestion.title}</div>
+        {selectModal}
       </div>
       <AiOutlineCaretDown color="gray" />
     </SelectWrapper>
@@ -46,10 +34,15 @@ const SelectWrapper = styled.div`
   display: flex;
   width: 300px;
   justify-content: space-between;
-  border: 1px solid gray;
+  border: 1px solid #96969682;
   border-radius: 3px;
   padding: 8px;
   align-items: center;
+  cursor: pointer;
+  &:hover {
+    background-color: #a598a52d;
+    border-color: #9696969e;
+  }
   div {
     display: flex;
     align-items: center;

@@ -7,12 +7,16 @@ import { CgProfile } from "react-icons/cg";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { FormActions } from "../../store/FormSlice";
+import { NavLink } from "react-router-dom";
 const Header = () => {
   const dispatch = useDispatch();
-  const quizData = useSelector(state=>state.form.quize)
-  console.log(quizData);
+  const quizeData = useSelector((state) => state.form.quize);
+  console.log(quizeData);
   const saveQuizDataHandler = () => {
     dispatch(FormActions.saveQuizData());
+  };
+  const changeThemeHandler = () => {
+    alert('sorry , temproary this functionalyty do not works , will fix soon (gobal styled)')
   };
   return (
     <HeaderWrapper>
@@ -22,24 +26,29 @@ const Header = () => {
           <span>Новая форма</span>
         </Logo>
         <HeaderSettings>
-          <BiPalette className="icon" />
-          <FiEye className="icon" />
+          <BiPalette onClick={changeThemeHandler} />
+          <FiEye />
           <button onClick={saveQuizDataHandler}>Отправить</button>
-          <BsThreeDotsVertical className="icon" />
-          <CgProfile className="icon" />
+          <BsThreeDotsVertical />
+          <CgProfile />
         </HeaderSettings>
       </FirsHeaderWrapper>
 
       <Nav>
         <ul>
-          <li>Вопросы</li>
-          <li>Ответы</li>
-          <li>Настройки</li>
+          <NavLink
+            className={({ isActive }) => (isActive ? "activeLink" : "")}
+            to="/quiz-create"
+          >
+            Вопросы
+          </NavLink>
+          <NavLink to="/quiz-forms">Тесты</NavLink>
         </ul>
       </Nav>
     </HeaderWrapper>
   );
 };
+export default Header;
 
 const HeaderWrapper = styled.header`
   height: 120px;
@@ -51,11 +60,6 @@ const HeaderWrapper = styled.header`
   border-bottom: 0.3px solid #d2cbdd;
   position: relative;
   z-index: 1;
-  .icon {
-    font-size: 25px;
-    color: #787575e9;
-    cursor: pointer;
-  }
 `;
 const FirsHeaderWrapper = styled.div`
   display: flex;
@@ -77,6 +81,15 @@ const HeaderSettings = styled.div`
   align-items: center;
   justify-content: space-evenly;
   width: 350px;
+
+  svg {
+    font-size: 25px;
+    color: #787575e9;
+    cursor: pointer;
+    &:hover {
+      color: #673ab7;
+    }
+  }
   button {
     background-color: #673ab7;
     color: #fff;
@@ -104,7 +117,12 @@ const Nav = styled.nav`
     list-style: none;
     justify-content: space-around;
     cursor: pointer;
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    .activeLink {
+      border-bottom: 2px dotted violet;
+    }
   }
 `;
-
-export default Header;

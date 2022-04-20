@@ -1,37 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import useInput from "../../../hooks/useInput";
 import { FormActions } from "../../../store/FormSlice";
 import FlexBox from "../../UI/Flexbox";
 
 export const QuizeHeaderBuilder = () => {
+  const dispatch = useDispatch();
   const quiz = useSelector((state) => state.form.quize);
   console.log(quiz);
-  const dispatch = useDispatch();
-  const {
-    enteredValue: quizTitleValue,
-    changeInputHandler: quizTitleValueChange,
-  } = useInput();
-  const {
-    enteredValue: quizDescriptionValue,
-    changeInputHandler: quizDescriptionValueChange,
-  } = useInput();
 
-  const saveQuizTitle = () => {};
-  const saveQuizDescription = () => {
-    dispatch(
-      FormActions.saveQuizTitileAndDescription({
-        quizTitleValue,
-        quizDescriptionValue,
-      })
-    );
+  const QuizTitleRef = useRef();
+  const QuizDescriptionRef = useRef();
+
+  const saveTextareaValueHandler = () => {
+    const QuizHeaderData = {
+      quizTitleValue: QuizTitleRef.current.value,
+      quizDescriptionValue: QuizDescriptionRef.current.value,
+      id: Math.random().toString(),
+    };
+    dispatch(FormActions.saveQuizTitileAndDescription(QuizHeaderData));
   };
-  const focusedContainer = (e) => {
-    console.log("focused");
-  };
+
   return (
-    <QuizeWrapper onClick={focusedContainer}>
+    <QuizeWrapper>
       <HeadIndicate />
       <FlexBox>
         <Indicate className="indicate" />
@@ -39,10 +30,11 @@ export const QuizeHeaderBuilder = () => {
           <div>
             <textarea
               className="big-textarea"
-              onChange={quizTitleValueChange}
-              onBlur={saveQuizTitle}
-              name="new-form"
-              rows={""}
+              ref={QuizTitleRef}
+              defaultValue={quiz.title || "Новая форма"}
+              onFocus={(e) => e.target.select()}
+              onBlur={saveTextareaValueHandler}
+              name="form-title"
             />
             <span className="highlight"></span>
             <span className="bar"></span>
@@ -50,8 +42,10 @@ export const QuizeHeaderBuilder = () => {
           <div>
             <textarea
               className="little-textarea"
-              onChange={quizDescriptionValueChange}
-              onBlur={saveQuizDescription}
+              ref={QuizDescriptionRef}
+              defaultValue={quiz.description || "Описание"}
+              onFocus={(e) => e.target.select()}
+              onBlur={saveTextareaValueHandler}
               name="description"
             />
             <span className="highlight"></span>
@@ -62,6 +56,9 @@ export const QuizeHeaderBuilder = () => {
     </QuizeWrapper>
   );
 };
+
+export default QuizeHeaderBuilder;
+
 const QuizeWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -102,17 +99,13 @@ const QuizeBuilderForm = styled.form`
     resize: none;
     font-size: 35px;
     font-weight: 700;
-
+    font-family: Georgia, "Times New Roman", Times, serif;
     -moz-appearance: none;
     align-items: center;
-
-    /* padding: 10px 10px 10px 0; */
     display: block;
     width: 665px;
     height: auto;
     overflow-y: none scroll;
-    /* min-height: 35px;
-    max-height: 600px; */
     border: none;
     border-bottom: 1px solid #b2aaaae7;
     &:focus {
@@ -198,4 +191,4 @@ const QuizeBuilderForm = styled.form`
   }
 `;
 
-export default QuizeHeaderBuilder;
+

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import QuizeForm from "./QuizeForm";
 import QuizeBuilderFooter from "./QuizeBuilderFooter";
 
-const QuizeBuilder = ({  quizeFormId, quizeFormAnswerItems, isQuestionImportant}) => {
+const QuizeBuilder = ({  quizeFormId, quizeFormAnswerItems, isQuestionImportant, typeOfQuestion, question}) => {
   return (
     <QuizeWrapper>
       <Indicate className="indicate" />
@@ -12,6 +12,8 @@ const QuizeBuilder = ({  quizeFormId, quizeFormAnswerItems, isQuestionImportant}
         <QuizeForm
           quizeFormId={quizeFormId}
           quizeFormAnswerItems={quizeFormAnswerItems}
+          typeOfQuestion={typeOfQuestion}
+          question={question}
         />
         <QuizeBuilderFooter
           quizeFormId={quizeFormId}
@@ -21,6 +23,7 @@ const QuizeBuilder = ({  quizeFormId, quizeFormAnswerItems, isQuestionImportant}
     </QuizeWrapper>
   );
 };
+export default QuizeBuilder;
 
 const QuizeWrapper = styled.div`
   display: flex;
@@ -37,4 +40,4 @@ const QuizeWrapper = styled.div`
   }
 `;
 
-export default QuizeBuilder;
+
