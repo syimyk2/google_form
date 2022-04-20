@@ -16,7 +16,9 @@ const Header = () => {
     dispatch(FormActions.saveQuizData());
   };
   const changeThemeHandler = () => {
-    alert('sorry , temproary this functionalyty do not works , will fix soon (gobal styled)')
+    alert(
+      "sorry , temproary this functionalyty do not works , will fix soon (gobal styled)"
+    );
   };
   return (
     <HeaderWrapper>
@@ -38,11 +40,16 @@ const Header = () => {
         <ul>
           <NavLink
             className={({ isActive }) => (isActive ? "activeLink" : "")}
-            to="/quiz-create"
+            to="quiz-create"
           >
             Вопросы
           </NavLink>
-          <NavLink to="/quiz-forms">Тесты</NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "activeLink" : "")}
+            to="quiz-forms"
+          >
+            Тесты
+          </NavLink>
         </ul>
       </Nav>
     </HeaderWrapper>

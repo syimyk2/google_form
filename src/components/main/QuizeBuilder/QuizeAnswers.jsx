@@ -153,7 +153,7 @@ export default QuizeAnswers;
 const QuzeAnswersContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 680px;
+  width: 780px;
   padding: 15px;
   margin: 0 auto;
 `;
@@ -175,7 +175,7 @@ const AnswerWithText = styled.div`
   align-items: center;
   font-size: 14px;
   height: 40px;
-  width: 600px;
+  width: 700px;
   border-bottom: 1px solid grey;
   border-bottom-style: dashed;
   color: grey;

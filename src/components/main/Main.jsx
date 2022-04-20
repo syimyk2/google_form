@@ -38,8 +38,9 @@ const Container = styled.main`
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin: 0 auto;
+  justify-content:center;
   padding-bottom: 64px;
-  width: 770px;
+  width: 800px;
+  margin: 0 auto;
 `;
 export default Main;
