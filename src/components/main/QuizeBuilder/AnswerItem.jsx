@@ -47,7 +47,7 @@ const AnswerItemWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 650px;
+  width: 700px;
   margin: 20px 0 20px;
   .answer-checkbox {
     margin-top: 8px;

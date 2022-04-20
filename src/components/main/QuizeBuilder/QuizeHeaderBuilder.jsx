@@ -62,7 +62,7 @@ export default QuizeHeaderBuilder;
 const QuizeWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 700px;
+  width: 800px;
   margin: 0 auto;
   border-radius: 8px;
   background: #ffffff;
@@ -80,7 +80,7 @@ export const Indicate = styled.div`
   z-index: 1;
   background-color: #fdfefff4;
 `;
-const HeadIndicate = styled.div`
+ export const HeadIndicate = styled.div`
   padding: 5px;
   position: relative;
   z-index: 2;
@@ -103,7 +103,7 @@ const QuizeBuilderForm = styled.form`
     -moz-appearance: none;
     align-items: center;
     display: block;
-    width: 665px;
+    width: 735px;
     height: auto;
     overflow-y: none scroll;
     border: none;
@@ -182,7 +182,7 @@ const QuizeBuilderForm = styled.form`
     padding: 5px 0 0 0px;
     -moz-appearance: none;
     display: block;
-    width: 665px;
+    width: 735px;
     border: none;
     border-bottom: 1px solid #b2aaaae7;
     &:focus {

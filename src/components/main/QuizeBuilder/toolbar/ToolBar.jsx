@@ -15,7 +15,7 @@ const StyledToolBar = styled.div`
   display: flex;
   position: fixed;
   z-index: 5;
-  left: 1043px;
+  left: 1100px;
   justify-content: center;
   flex-direction: column;
   align-items: center;

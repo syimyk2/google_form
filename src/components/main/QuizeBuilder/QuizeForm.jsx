@@ -61,7 +61,7 @@ const BuilderForm = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 680px;
+  width: 780px;
   margin: 0 auto;
   padding: 15px;
   .icon-img {

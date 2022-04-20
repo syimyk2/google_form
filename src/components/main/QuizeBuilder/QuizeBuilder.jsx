@@ -26,12 +26,13 @@ const QuizeBuilder = ({  quizeFormId, quizeFormAnswerItems, isQuestionImportant,
 export default QuizeBuilder;
 
 const QuizeWrapper = styled.div`
+box-sizing: border-box;
   display: flex;
   margin: 15px 0 15px;
-  width: 700px;
+  width: 800px;
   border-radius: 8px;
   background: #ffffff;
-  box-shadow: 2px 5px 8px 0px;
+  box-shadow: 2px 5px 9px 0px #777575a5;
   overflow: hidden;
   &:focus-within {
     .indicate {
