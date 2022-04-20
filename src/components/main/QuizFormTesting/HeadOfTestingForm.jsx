@@ -2,23 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import { HeadIndicate } from "../QuizeBuilder/QuizeHeaderBuilder";
 
-const HeadOfTestingForm = () => {
+const HeadOfTestingForm = ({ title, description }) => {
   return (
     <Wrapper>
       <HeadIndicate />
       <Container>
         <section>
           <div>
-            <h1>{"Title of Test"}</h1>
+            <h1>{title}</h1>
           </div>
           <div>
-            <p>
-              {
-                "Description of Test long long logn long llooooooooong loooggggggggggggggggggg"
-              }
-            </p>
+            <p>{description}</p>
           </div>
-          <input type="email" placeholder="email" />
+          <input type="email" placeholder="email" required />
         </section>
       </Container>
     </Wrapper>

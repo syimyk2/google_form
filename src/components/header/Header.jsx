@@ -15,7 +15,6 @@ const Header = () => {
   const location = useLocation()
   // console.log(quizeData);
   const saveQuizDataHandler = () => {
-    dispatch(formActions.saveQuizData());
     dispatch(saveQuizFormData())
   };
   const changeThemeHandler = () => {

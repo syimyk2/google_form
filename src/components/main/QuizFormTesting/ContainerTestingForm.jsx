@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getQuizFormData } from "../../../store/asyncFunctions";
 import FlexBox from "../../UI/Flexbox";
 import BodyOfTesstingForm from "./BodyOfTesstingForm";
@@ -7,9 +7,8 @@ import HeadOfTestingForm from "./HeadOfTestingForm";
 
 const ContainerTestingForm = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getQuizFormData());
-  }, []);
+  const {quiz} = useSelector(state=>state.testing)
+   console.log(quiz);
   return (
     <FlexBox
       direction="column"
@@ -17,8 +16,8 @@ const ContainerTestingForm = () => {
       justify="space-between"
       margin="0 auto"
     >
-      <HeadOfTestingForm />
-      <BodyOfTesstingForm />
+      <HeadOfTestingForm  title={quiz.quizTitle} description={quiz.quizDescription} />
+      <BodyOfTesstingForm quiz={quiz} />
     </FlexBox>
   );
 };

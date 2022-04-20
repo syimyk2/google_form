@@ -12,7 +12,6 @@ const Main = () => {
   const dispatch = useDispatch()
   // console.log(quizeForms);
   useEffect(() => {
-    dispatch(getQuizFormData()); 
     saveToLocalStorage('@quiz-data', quize) 
   }, [quize]);
   return (

@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { getQuizFormData } from "../../../store/asyncFunctions";
 import QuizeFormTest from "./QuizeFormTest";
 
 const QuizeForms = () => {
+  const dispatch = useDispatch();
+  const { quizes, status } = useSelector((state) => state.testing);
+  console.log(quizes[0]);
+  useEffect(() => {
+    dispatch(getQuizFormData());
+  }, []);
   return (
     <QuizFormsContainer>
-      <QuizeFormTest />
+      {quizes.map((quiz)=> <QuizeFormTest key={quiz.id} id={quiz.id} quizeData={quiz.quizeData}/>)}
     </QuizFormsContainer>
   );
 };

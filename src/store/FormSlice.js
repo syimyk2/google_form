@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { SOMEOFLIST } from "../utils/constants/general";
 import { getFromLocalStorage } from "../utils/helpers/storageHelper";
-import { getQuizFormData } from "./asyncFunctions";
+
  const localData = getFromLocalStorage('@quiz-data')
 const initialState = {
   status: 'pending',
@@ -42,7 +42,7 @@ export const formSlice = createSlice({
     },
     duplicateQuizForm(state, actions) {
       let formId = actions.payload;
-      let focusedFormItem = [...state.quize.quizeForms].find(
+      let focusedFormItem = state.quize.quizeForms.find(
         (quizeForm) => quizeForm.id === formId
       );
       let index = state.quize.quizeForms.findIndex((el) => el.id === formId);
@@ -141,16 +141,16 @@ export const formSlice = createSlice({
     },
   },
   // ------------extra reducers------------------
-  extraReducers: {
-    [getQuizFormData.pending]: (state) => {
-      state.status = "loading";
-    },
-    [getQuizFormData.fulfilled]: (state, action) => {
-      state.status = "resolved";
-      // state.quize = action.payload;
+  // extraReducers: {
+  //   [getQuizFormData.pending]: (state) => {
+  //     state.status = "loading";
+  //   },
+  //   [getQuizFormData.fulfilled]: (state, action) => {
+  //     state.status = "resolved";
+  //     // state.quize = action.payload;
 
-    },
-  },
+  //   },
+  // },
 });
 
 export const formActions = formSlice.actions;

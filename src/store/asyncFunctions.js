@@ -21,12 +21,12 @@ export const saveQuizFormData = createAsyncThunk(
 );
 
 export const getQuizFormData = createAsyncThunk(
-    "form/getQuizFormData",
+    "testing/getQuizFormData",
     async (_,{ rejectWithValue }) => {
       try {
         const response = await fetch(`${BASE_URL}/quiz-data.json`);
         const result = await response.json();
-        console.log(result);
+        // console.log(result);
         if (!response.ok) {
           throw new Error("Something went wrong with Server Firebase!");
         }
@@ -37,7 +37,7 @@ export const getQuizFormData = createAsyncThunk(
             id: key,
           });
         }
-        console.log(transformedQuizData);
+        // console.log(transformedQuizData);
         return transformedQuizData
       } catch (error) {
         rejectWithValue(error.message);
