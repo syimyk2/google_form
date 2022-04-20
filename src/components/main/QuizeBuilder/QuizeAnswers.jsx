@@ -4,7 +4,7 @@ import { MdDateRange } from "react-icons/md";
 import { IoMdTime } from "react-icons/io";
 import useInput from "../../../hooks/useInput";
 import { useDispatch } from "react-redux";
-import { FormActions } from "../../../store/FormSlice";
+import { formActions } from "../../../store/formSlice";
 import { Variant } from "./AnswerItem";
 import VariantAdder from "./VariantAdder";
 import {
@@ -34,17 +34,17 @@ const QuizeAnswers = ({
       isVariantCorrect: false,
     };
 
-    dispatch(FormActions.addVariants({ quizeVariants, formId }));
+    dispatch(formActions.addVariants({ quizeVariants, formId }));
   };
 
   const deleteVariantItemHandler = (formId, itemId) => {
-    dispatch(FormActions.deleteVariants({ formId, itemId }));
+    dispatch(formActions.deleteVariants({ formId, itemId }));
   };
   const saveVariantValueHandler = (formId, itemId) => {
-    dispatch(FormActions.saveVariantsValue({ formId, itemId, variantValue }));
+    dispatch(formActions.saveVariantsValue({ formId, itemId, variantValue }));
   };
   const selctAsAcorrectVariantHandler = (formId, itemId) => {
-    dispatch(FormActions.selectVariantAsAcorrect({ formId, itemId }));
+    dispatch(formActions.selectVariantAsAcorrect({ formId, itemId }));
   };
 
   // ----------------Change answer form ---------------------

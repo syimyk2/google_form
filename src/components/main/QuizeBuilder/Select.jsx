@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import SelectModal from "./SelectModal";
 import { useDispatch } from "react-redux";
-import { FormActions } from "../../../store/FormSlice";
+import { FormActions } from "../../../store/formSlice";
 
 const Select = ({ quizeFormId, onSelected, typeOfQuestion }) => {
   const [showSelectModal, setShowSelectModal] = useState(null);

@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { SOMEOFLIST } from "../utils/constants/general";
-import {
-  getFromLocalStorage,
-  saveToLocalStorage,
-} from "../utils/helpers/storageHelper";
-
+import { getFromLocalStorage } from "../utils/helpers/storageHelper";
+import { getQuizFormData } from "./asyncFunctions";
+ const localData = getFromLocalStorage('@quiz-data')
 const initialState = {
-  quize: {},
-  quizeForms: [],
+  status: 'pending',
+  quize: localData ||{
+    quizeForms: [],
+  },
   answersSettings: [],
 };
 
-export const FormSlice = createSlice({
+export const formSlice = createSlice({
   name: "form",
   initialState: initialState,
   reducers: {
@@ -22,13 +22,13 @@ export const FormSlice = createSlice({
       state.quize.quizDescription = quizDescriptionValue;
     },
     saveQuizData(state, actions) {
-      state.quize.quizeForms = state.quizeForms;
+      // state.quize.quizeForms = state.quizeForms;
     },
 
     // ---------forms actions-----
     addQuizForm(state, actions) {
-      state.quizeForms = [
-        ...state.quizeForms,
+      state.quize.quizeForms = [
+        ...state.quize.quizeForms,
         {
           ...actions.payload,
           answerItems: [{ id: Math.random().toString() }],
@@ -37,23 +37,23 @@ export const FormSlice = createSlice({
     },
     deleteQuizForm(state, actions) {
       let formId = actions.payload;
-      let index = state.quizeForms.findIndex((el) => el.id === formId);
-      state.quizeForms.splice(index, 1);
+      let index = state.quize.quizeForms.findIndex((el) => el.id === formId);
+      state.quize.quizeForms.splice(index, 1);
     },
     duplicateQuizForm(state, actions) {
       let formId = actions.payload;
-      let focusedFormItem = [...state.quizeForms].find(
+      let focusedFormItem = [...state.quize.quizeForms].find(
         (quizeForm) => quizeForm.id === formId
       );
-      let index = state.quizeForms.findIndex((el) => el.id === formId);
-      const newArray = state.quizeForms.splice(index + 1, 0, {
+      let index = state.quize.quizeForms.findIndex((el) => el.id === formId);
+      const newArray = state.quize.quizeForms.splice(index + 1, 0, {
         ...focusedFormItem,
         id: Math.random().toString(),
       });
     },
     addFormQuestion(state, actions) {
       let { formId, questionValue } = actions.payload;
-      state.quizeForms.map((quizeForm) => {
+      state.quize.quizeForms.map((quizeForm) => {
         if (quizeForm.id === formId) {
           quizeForm.question = questionValue;
         }
@@ -62,7 +62,7 @@ export const FormSlice = createSlice({
     },
     selectTypeOfQuestion(state, actions) {
       let { selectedType, quizeFormId } = actions.payload;
-      state.quizeForms.map((quizeForm) => {
+      state.quize.quizeForms.map((quizeForm) => {
         if (quizeForm.id === quizeFormId) {
           quizeForm.typeOfQuestion = selectedType;
           quizeForm.answerItems.map((el) => {
@@ -74,7 +74,7 @@ export const FormSlice = createSlice({
     },
     setQuestionImportant(state, actions) {
       let formId = actions.payload;
-      state.quizeForms.map((quizeForm) => {
+      state.quize.quizeForms.map((quizeForm) => {
         if (quizeForm.id === formId) {
           quizeForm.isQuestionImportant = !quizeForm.isQuestionImportant;
         }
@@ -85,7 +85,7 @@ export const FormSlice = createSlice({
     // -----------question variants actions ------------
     addVariants(state, actions) {
       let { formId, quizeVariants } = actions.payload;
-      state.quizeForms.map((quizeForm) => {
+      state.quize.quizeForms.map((quizeForm) => {
         if (quizeForm.id === formId) {
           quizeForm.answerItems.push({
             ...quizeVariants,
@@ -97,7 +97,7 @@ export const FormSlice = createSlice({
     },
     deleteVariants(state, actions) {
       let { formId, itemId } = actions.payload;
-      let focusedFormItem = state.quizeForms.find((el) => el.id === formId);
+      let focusedFormItem = state.quize.quizeForms.find((el) => el.id === formId);
       let index = focusedFormItem.answerItems.findIndex(
         (el) => el.id === itemId
       );
@@ -105,7 +105,7 @@ export const FormSlice = createSlice({
     },
     saveVariantsValue(state, actions) {
       let { formId, itemId, variantValue } = actions.payload;
-      let focusedFormItem = state.quizeForms.find((el) => el.id === formId);
+      let focusedFormItem = state.quize.quizeForms.find((el) => el.id === formId);
       focusedFormItem.answerItems.map((el) => {
         if (el.id === itemId) {
           el.variantValue = variantValue;
@@ -115,7 +115,7 @@ export const FormSlice = createSlice({
     },
     selectVariantAsAcorrect(state, actions) {
       let { formId, itemId } = actions.payload;
-      let focusedFormItem = state.quizeForms.find((el) => el.id === formId);
+      let focusedFormItem = state.quize.quizeForms.find((el) => el.id === formId);
 
       if (focusedFormItem.typeOfQuestion.title === SOMEOFLIST) {
         focusedFormItem.answerItems.map((el) => {
@@ -140,6 +140,17 @@ export const FormSlice = createSlice({
       state.answersSettings = [...actions.payload];
     },
   },
+  // ------------extra reducers------------------
+  extraReducers: {
+    [getQuizFormData.pending]: (state) => {
+      state.status = "loading";
+    },
+    [getQuizFormData.fulfilled]: (state, action) => {
+      state.status = "resolved";
+      // state.quize = action.payload;
+
+    },
+  },
 });
 
-export const FormActions = FormSlice.actions;
+export const formActions = formSlice.actions;

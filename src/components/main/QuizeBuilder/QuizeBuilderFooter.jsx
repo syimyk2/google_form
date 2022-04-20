@@ -4,20 +4,20 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdOutlineContentCopy } from "react-icons/md";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { FormActions } from "../../../store/FormSlice";
+import { formActions } from "../../../store/formSlice";
 
 const QuizeBuilderFooter = ({ quizeFormId, isQuestionImportant }) => {
   const dispatch = useDispatch();
 
   const deleteFormHandler = (formId) => {
-    dispatch(FormActions.deleteQuizForm(formId));
+    dispatch(formActions.deleteQuizForm(formId));
   };
 
   const duplicateFormHandler = (formId) => {
-    dispatch(FormActions.duplicateQuizForm(formId));
+    dispatch(formActions.duplicateQuizForm(formId));
   };
   const setQuestionImportantHandler = (formId) => {
-    dispatch(FormActions.setQuestionImportant(formId));
+    dispatch(formActions.setQuestionImportant(formId));
   };
   return (
     <QuizeBuilderFooterOptions>

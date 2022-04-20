@@ -1,20 +1,27 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { getQuizFormData, saveQuizFormData } from "../../store/asyncFunctions";
+import { saveToLocalStorage } from "../../utils/helpers/storageHelper";
 import QuizeBuilder from "./QuizeBuilder/QuizeBuilder";
 import QuizeHeaderBuilder from "./QuizeBuilder/QuizeHeaderBuilder";
 import { ToolBar } from "./QuizeBuilder/toolbar/ToolBar";
 
 const Main = () => {
-  const { quizeForms } = useSelector((state) => state.form);
-  console.log(quizeForms);
+  const { quize } = useSelector((state) => state.form);
+  const dispatch = useDispatch()
+  // console.log(quizeForms);
+  useEffect(() => {
+    dispatch(getQuizFormData()); 
+    saveToLocalStorage('@quiz-data', quize) 
+  }, [quize]);
   return (
     <MainWrapper>
       <Container>
         <QuizeHeaderBuilder />
         <ToolBar />
 
-        {quizeForms.map((quizeForm) => (
+        {quize.quizeForms.map((quizeForm) => (
           <QuizeBuilder
             key={quizeForm.id}
             quizeFormId={quizeForm.id}

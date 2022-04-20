@@ -8,7 +8,7 @@ import { BiText } from "react-icons/bi";
 import { BsCardImage } from "react-icons/bs";
 import { GrChapterAdd } from "react-icons/gr";
 import { useDispatch } from "react-redux";
-import { FormActions } from "../../../../store/FormSlice";
+import { formActions } from "../../../../store/formSlice";
 import { ANSWER_SETTINGS } from "../SelectModal";
 
 const StyledToolBar = styled.div`
@@ -16,6 +16,7 @@ const StyledToolBar = styled.div`
   position: fixed;
   z-index: 5;
   left: 1100px;
+  top: 120px;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -44,7 +45,7 @@ export const ToolBar = () => {
       isQuestionImportant: false,
       typeOfQuestion: ANSWER_SETTINGS[0],
     };
-    dispatch(FormActions.addQuizForm(quizeForm));
+    dispatch(formActions.addQuizForm(quizeForm));
   };
   return (
     <StyledToolBar>
