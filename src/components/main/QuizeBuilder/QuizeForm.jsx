@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Select from "./Select";
 import { useDispatch} from "react-redux";
 import useInput from "../../../hooks/useInput";
-import { FormActions } from "../../../store/FormSlice";
+import { formActions } from "../../../store/formSlice";
 
 const QuizeForm = ({ quizeFormId, quizeFormAnswerItems, typeOfQuestion,question }) => {
   const dispatch = useDispatch();
@@ -17,11 +17,11 @@ const QuizeForm = ({ quizeFormId, quizeFormAnswerItems, typeOfQuestion,question 
 
   const saveQuestionValueHandler = (formId) => {
     console.log(formId, questionValue);
-    dispatch(FormActions.addFormQuestion({ formId, questionValue }));
+    dispatch(formActions.addFormQuestion({ formId, questionValue }));
   };
 
   const selectVariantsType = (selectedType) => {
-    dispatch(FormActions.selectTypeOfQuestion({ selectedType, quizeFormId }));
+    dispatch(formActions.selectTypeOfQuestion({ selectedType, quizeFormId }));
   };
 
   return (
@@ -89,7 +89,7 @@ const BuilderForm = styled.div`
   & .bar:before,
   .bar:after {
     content: "";
-    height: 1.5px;
+    height: 1px;
     width: 0;
     bottom: 1px;
     position: absolute;

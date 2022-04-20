@@ -4,7 +4,7 @@ import Button from "../../UI/Button";
 import { Indicate } from "../QuizeBuilder/QuizeHeaderBuilder";
 import AnswerVariant from "./AnswerVariant";
 
-const BodyOfTesstingForm = () => {
+const BodyOfTesstingForm = ({quiz}) => {
   const selectAnswerHandler = (variantId) => {
     alert("selected variant");
   };
@@ -13,21 +13,17 @@ const BodyOfTesstingForm = () => {
       <Indicate className="test-indicate" />
       <Container>
         <section>
-          <h1>{"Here must be current question?"}</h1>
+          <h1>{quiz.quizeForms[0].question}</h1>
         </section>
         <VariantAnswersContainer>
-          <AnswerVariant
-            key={""}
-            id={"id"}
+          {quiz.quizeForms[0].answerItems.map((question)=><AnswerVariant
+            key={question.id}
+            id={question.id}
             onClick={selectAnswerHandler}
-            variant={"some variant"}
-          />
-          <AnswerVariant
-            key={""}
-            id={"id"}
-            onClick={selectAnswerHandler}
-            variant={"some variant"}
-          />
+            variant={question.variantValue}
+          />)}
+          
+          
         </VariantAnswersContainer>
         <div>
             <Button>Next question</Button>

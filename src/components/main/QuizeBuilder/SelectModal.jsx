@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import ReactDOM from "react-dom";
 import { useDispatch } from "react-redux";
-import { FormActions } from "../../../store/FormSlice";
+import { formActions } from "../../../store/formSlice";
 import email from "../../../assets/icon/email.svg";
 import time from "../../../assets/icon/time.svg";
 import date from "../../../assets/icon/date.svg";
@@ -43,7 +43,7 @@ const Modal = (props) => {
     props.onSelect(selectedSetting);
   };
   useEffect(() => {
-    dispatch(FormActions.addSettings(ANSWER_SETTINGS));
+    dispatch(formActions.addSettings(ANSWER_SETTINGS));
   }, []);
   return (
     <CardModalWrapper>

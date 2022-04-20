@@ -6,14 +6,16 @@ import { FiEye } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { FormActions } from "../../store/FormSlice";
-import { NavLink } from "react-router-dom";
+import { formActions } from "../../store/formSlice";
+import { NavLink, useLocation} from "react-router-dom";
+import { saveQuizFormData } from "../../store/asyncFunctions";
 const Header = () => {
   const dispatch = useDispatch();
   const quizeData = useSelector((state) => state.form.quize);
-  console.log(quizeData);
+  const location = useLocation()
+  // console.log(quizeData);
   const saveQuizDataHandler = () => {
-    dispatch(FormActions.saveQuizData());
+    dispatch(saveQuizFormData())
   };
   const changeThemeHandler = () => {
     alert(
@@ -30,7 +32,7 @@ const Header = () => {
         <HeaderSettings>
           <BiPalette onClick={changeThemeHandler} />
           <FiEye />
-          <button onClick={saveQuizDataHandler}>Отправить</button>
+         {location.pathname == '/quiz/quiz-create' ? <button onClick={saveQuizDataHandler}>Сохранить</button>: '' } 
           <BsThreeDotsVertical />
           <CgProfile />
         </HeaderSettings>

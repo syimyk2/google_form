@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { FormActions } from "../../../store/FormSlice";
+import { formActions } from "../../../store/formSlice";
 import FlexBox from "../../UI/Flexbox";
 
 export const QuizeHeaderBuilder = () => {
   const dispatch = useDispatch();
   const quiz = useSelector((state) => state.form.quize);
-  console.log(quiz);
+  // console.log(quiz);
 
   const QuizTitleRef = useRef();
   const QuizDescriptionRef = useRef();
@@ -18,7 +18,7 @@ export const QuizeHeaderBuilder = () => {
       quizDescriptionValue: QuizDescriptionRef.current.value,
       id: Math.random().toString(),
     };
-    dispatch(FormActions.saveQuizTitileAndDescription(QuizHeaderData));
+    dispatch(formActions.saveQuizTitileAndDescription(QuizHeaderData));
   };
 
   return (
@@ -116,7 +116,7 @@ const QuizeBuilderForm = styled.form`
   & .bar {
     position: relative;
     display: block;
-    width: 665px;
+    width: 735px;
   }
   & .bar:before,
   .bar:after {
