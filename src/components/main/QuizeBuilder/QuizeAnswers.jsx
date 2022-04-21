@@ -176,7 +176,6 @@ const AnswerWithText = styled.div`
   font-size: 14px;
   height: 40px;
   width: 700px;
-  border-bottom: 1px solid grey;
-  border-bottom-style: dashed;
+  border-bottom: 1px dashed grey;
   color: grey;
 `;

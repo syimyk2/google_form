@@ -1,36 +1,42 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { testingActions } from "../../../store/testingSlice";
 import { saveToLocalStorage } from "../../../utils/helpers/storageHelper";
-import {testingActions} from '../../../store/testingSlice'
 import Button from "../../UI/Button";
 import { Indicate } from "../QuizeBuilder/QuizeHeaderBuilder";
-import AnswerVariant from "./AnswerVariant";
+import AnswerVariant from "./typeOfAnswers/AnswerVariant";
+import AnswerWitDate from "./typeOfAnswers/AnswerWitDate";
+import { AnswerWithText } from "./typeOfAnswers/AnswerWithText";
+import AnswerWitTime from "./typeOfAnswers/AnswerWithTime";
+import { SingleAnswerWrapper } from "./typeOfAnswers/SingleAnswerWrapper";
 
 const BodyOfTesstingForm = () => {
   const dispatch = useDispatch();
-  const { quizData, quizItems, quiz } = useSelector((state) => state.testing);
+  const { quizData, quiz } = useSelector((state) => state.testing);
   const selectAnswerHandler = (variantId) => {
     alert("selected variant");
   };
-  console.log(quiz);
+  console.log(quiz.answerItems.length, quiz.count);
   useEffect(() => {
     saveToLocalStorage("@questions", quizData.quizeForms);
     saveToLocalStorage("@quiz", quizData);
   }, [quizData]);
-  
+
   const goToNexQuestionHandler = () => {
-     dispatch(testingActions.goToNextQuestion())
+    dispatch(testingActions.gotoNextQuestion());
   };
+  const testButtonValue =
+    quiz.answerItems.length + 1 === quiz.count ? "Finish" : "Next Question";
   return (
     <Wrapper>
       <Indicate className="test-indicate" />
       <Container>
         <section>
-          <h1>{quizItems[0].question}</h1>
+          <h1>{quiz.question}</h1>
         </section>
         <VariantAnswersContainer>
-          {quizItems[0].answerItems.map((question) => (
+          {/* {quiz.answerItems.map((question) => (
             <AnswerVariant
               key={question.id}
               id={question.id}
@@ -38,10 +44,14 @@ const BodyOfTesstingForm = () => {
               variant={question.variantValue}
               checked={true}
             />
-          ))}
+          ))} */}
+          {/* <AnswerWithText/> */}
+          {/* <AnswerWitDate /> */}
+          {/* <AnswerWitTime/> */}
+          <SingleAnswerWrapper/>
         </VariantAnswersContainer>
-        <div>
-          <Button onClick={goToNexQuestionHandler}>Next question</Button>
+        <div className="button-container">
+          <Button onClick={goToNexQuestionHandler}>{testButtonValue}</Button>
         </div>
       </Container>
     </Wrapper>
@@ -54,18 +64,27 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  text-align: center;
-  color: #034c4ce4;
+
   section {
+    padding: 20px 8px 20px 20px;
     width: 860px;
     word-break: break-all;
+    font-size: 14px;
+    color: #034c4ce4;
   }
+  & .button-container{
+   width: 860px;
+   display: flex;
+   justify-content: center;
+   padding: 20px;
+  }
+  
 `;
 const Wrapper = styled.div`
   display: flex;
   overflow: hidden;
   width: 900px;
-  height: 380px;
+  /* height: 380px; */
   border-radius: 5px;
   background-color: #fff;
   margin: 0 auto;
@@ -76,7 +95,7 @@ const Wrapper = styled.div`
 `;
 const VariantAnswersContainer = styled.div`
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   height: 100%;
   flex-direction: column;
   justify-content: space-evenly;

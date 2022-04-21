@@ -9,7 +9,7 @@ const initialState = {
   quizes: [],
   quizData: quizFromLocal || {},
   quizItems: questionsFromLocal || [],
-  quiz: { ...questionsFromLocal[0], count: 0},
+  quiz: { ...questionsFromLocal[0], count: 1 },
 };
 
 export const testingSlice = createSlice({
@@ -21,10 +21,18 @@ export const testingSlice = createSlice({
       const testingQuiz = state.quizes.find((quiz) => quiz.id === quizId);
       state.quizData = testingQuiz.quizeData;
     },
+    gotoNextQuestion(state) {
+      if(state.quiz.count===state.quizItems.length){
+        alert('finsh')
+        return
+      }
+      state.quiz = {
+        ...state.quizItems[state.quiz.count],
+        count: state.quiz.count+1,
+      };
+    },
   },
-  goToNextQuestion(state, actions) {
-    state.quiz = { ...state.quizItems[state.quiz.count], count: state.count++ };
-  },
+
   //  -------extra reducers-----------
   extraReducers: {
     [getQuizFormData.pending]: (state) => {
@@ -37,4 +45,4 @@ export const testingSlice = createSlice({
   },
 });
 
-export const testingActions = testingSlice.actions
+export const testingActions = testingSlice.actions;

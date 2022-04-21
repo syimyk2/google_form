@@ -1,11 +1,11 @@
 import React from 'react'
-import ContainerTestingForm from '../main/QuizFormTesting/ContainerTestingForm'
+import ContainerOfTesting from '../main/QuizFormTesting/ContainerOfTesting'
 import FlexBox from '../UI/Flexbox'
 
 const TestingQuizeFormPage = () => {
   return (
     <FlexBox padding='40px'>
-      <ContainerTestingForm/> 
+      <ContainerOfTesting/> 
     </FlexBox>
   )
 }
