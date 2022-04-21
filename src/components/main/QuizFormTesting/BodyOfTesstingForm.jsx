@@ -1,32 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { saveToLocalStorage } from "../../../utils/helpers/storageHelper";
+import {testingActions} from '../../../store/testingSlice'
 import Button from "../../UI/Button";
 import { Indicate } from "../QuizeBuilder/QuizeHeaderBuilder";
 import AnswerVariant from "./AnswerVariant";
 
-const BodyOfTesstingForm = ({quiz}) => {
+const BodyOfTesstingForm = () => {
+  const dispatch = useDispatch();
+  const { quizData, quizItems, quiz } = useSelector((state) => state.testing);
   const selectAnswerHandler = (variantId) => {
     alert("selected variant");
+  };
+  console.log(quiz);
+  useEffect(() => {
+    saveToLocalStorage("@questions", quizData.quizeForms);
+    saveToLocalStorage("@quiz", quizData);
+  }, [quizData]);
+  
+  const goToNexQuestionHandler = () => {
+     dispatch(testingActions.goToNextQuestion())
   };
   return (
     <Wrapper>
       <Indicate className="test-indicate" />
       <Container>
         <section>
-          <h1>{quiz.quizeForms[0].question}</h1>
+          <h1>{quizItems[0].question}</h1>
         </section>
         <VariantAnswersContainer>
-          {quiz.quizeForms[0].answerItems.map((question)=><AnswerVariant
-            key={question.id}
-            id={question.id}
-            onClick={selectAnswerHandler}
-            variant={question.variantValue}
-          />)}
-          
-          
+          {quizItems[0].answerItems.map((question) => (
+            <AnswerVariant
+              key={question.id}
+              id={question.id}
+              onClick={selectAnswerHandler}
+              variant={question.variantValue}
+              checked={true}
+            />
+          ))}
         </VariantAnswersContainer>
         <div>
-            <Button>Next question</Button>
+          <Button onClick={goToNexQuestionHandler}>Next question</Button>
         </div>
       </Container>
     </Wrapper>
@@ -60,9 +75,9 @@ const Wrapper = styled.div`
   }
 `;
 const VariantAnswersContainer = styled.div`
-     display: flex;
-    align-items: center;
-    height: 100%;
-    flex-direction: column;
-    justify-content: space-evenly;
-`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-evenly;
+`;

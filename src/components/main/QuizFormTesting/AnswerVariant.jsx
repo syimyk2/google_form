@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const AnswerVariant = ({ id, variant, onClick, type }) => {
+const AnswerVariant = ({ id, variant, onClick, type, checked}) => {
   return (
     <VariantWrapper onClick={() => onClick(id)}>
-      <input type={type || "radio"} /> <span>{variant}</span>
+      <input onChange={onClick} type={type || "radio"} checked ={checked} /> <span>{variant}</span>
     </VariantWrapper>
   );
 };
@@ -19,6 +19,10 @@ const VariantWrapper = styled.div`
   align-items: center;
   height: 50px;
   width: 700px;
+  cursor: pointer;
+  &:hover{
+    background-color: #6f3bd67c;
+  }
 
   span {
     padding-left: 30px;

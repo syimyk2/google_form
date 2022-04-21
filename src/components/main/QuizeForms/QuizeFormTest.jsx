@@ -8,9 +8,9 @@ import { HeadIndicate } from "../QuizeBuilder/QuizeHeaderBuilder";
 const QuizeFormTest = ({ id, quizeData }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const goToTestingQuizeFormHandler = (quizId, quizData) => {
+  const goToTestingQuizeFormHandler = (quizId) => {
     navigate(`/testing/${quizId}`);
-    dispatch(testingActions.selectQuizTest(quizData));
+    dispatch(testingActions.selectQuizTest(quizId));
   };
   return (
     <Wrapper>
@@ -25,7 +25,7 @@ const QuizeFormTest = ({ id, quizeData }) => {
           </div>
         </section>
         <div>
-          <Button onClick={() => goToTestingQuizeFormHandler(id, quizeData)}>
+          <Button onClick={() => goToTestingQuizeFormHandler(id)}>
             Пройти тестирование
           </Button>
         </div>
@@ -54,4 +54,5 @@ const Wrapper = styled.div`
   overflow: hidden;
   border-radius: 5px;
   background-color: #fff;
+  margin-top: 30px;
 `;

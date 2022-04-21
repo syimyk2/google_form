@@ -7,17 +7,14 @@ import HeadOfTestingForm from "./HeadOfTestingForm";
 
 const ContainerTestingForm = () => {
   const dispatch = useDispatch();
-  const {quiz} = useSelector(state=>state.testing)
-   console.log(quiz);
+  const { quizData } = useSelector((state) => state.testing);
   return (
-    <FlexBox
-      direction="column"
-      height="90vh"
-      justify="space-between"
-      margin="0 auto"
-    >
-      <HeadOfTestingForm  title={quiz.quizTitle} description={quiz.quizDescription} />
-      <BodyOfTesstingForm quiz={quiz} />
+    <FlexBox direction="column" justify="space-between" margin="0 auto">
+      <HeadOfTestingForm
+        title={quizData.quizTitle}
+        description={quizData.quizDescription}
+      />
+      <BodyOfTesstingForm />
     </FlexBox>
   );
 };

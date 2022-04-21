@@ -140,17 +140,6 @@ export const formSlice = createSlice({
       state.answersSettings = [...actions.payload];
     },
   },
-  // ------------extra reducers------------------
-  // extraReducers: {
-  //   [getQuizFormData.pending]: (state) => {
-  //     state.status = "loading";
-  //   },
-  //   [getQuizFormData.fulfilled]: (state, action) => {
-  //     state.status = "resolved";
-  //     // state.quize = action.payload;
-
-  //   },
-  // },
 });
 
 export const formActions = formSlice.actions;
