@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getQuizFormData } from "../../../store/asyncFunctions";
+import Loading from "../../UI/Loading";
 import QuizeFormTest from "./QuizeFormTest";
 
 const QuizeForms = () => {
@@ -11,9 +12,13 @@ const QuizeForms = () => {
   useEffect(() => {
     dispatch(getQuizFormData());
   }, []);
+  const loading = status === "loading" && <Loading />;
   return (
     <QuizFormsContainer>
-      {quizes.map((quiz)=> <QuizeFormTest key={quiz.id} id={quiz.id} quizeData={quiz.quizeData}/>)}
+      {loading}
+      {quizes.map((quiz) => (
+        <QuizeFormTest key={quiz.id} id={quiz.id} quizeData={quiz.quizeData} />
+      ))}
     </QuizFormsContainer>
   );
 };
