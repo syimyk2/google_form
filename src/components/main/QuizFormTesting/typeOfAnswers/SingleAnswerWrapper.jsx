@@ -1,14 +1,27 @@
 import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import FlexBox from "../../../UI/Flexbox";
-import { MdDateRange } from "react-icons/md";
+import { testingActions } from "../../../../store/testingSlice";
 
-export const SingleAnswerWrapper = ({type,id, title }) => {
-  const dateRef = useRef();
+export const SingleAnswerWrapper = ({ type, id, title, question }) => {
+  const dispatch = useDispatch();
+  const inputRef = useRef();
+  const saveInputValueHandler = () => {
+    let enteredValue =inputRef.current.value
+    dispatch(testingActions.saveInputsValue({question, enteredValue}))
+    inputRef.current.value =''
+  };
   return (
     <Wrapper type={type}>
       <p>{title}</p>
-      <input type={type} ref={dateRef} name="singleanswer" id={id} />
+      <input
+        type={type}
+        name="singleanswer"
+        ref={inputRef}
+        onBlur={saveInputValueHandler}
+        id={id}
+        required
+      />
     </Wrapper>
   );
 };

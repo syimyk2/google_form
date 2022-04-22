@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { HeadIndicate } from "../QuizeBuilder/QuizeHeaderBuilder";
 
-const HeadOfTestingForm = ({ title, description }) => {
+const HeadOfTestingForm = ({ title, description}) => {
   return (
     <Wrapper>
       <HeadIndicate />
@@ -11,10 +11,14 @@ const HeadOfTestingForm = ({ title, description }) => {
           <div>
             <h1>{title}</h1>
           </div>
+          <hr />
           <div>
             <p>{description}</p>
           </div>
-          <input type="email" placeholder="email" required />
+
+          <QuizSettings>
+            <span>*</span> <p>Обязательный</p>
+          </QuizSettings>
         </section>
       </Container>
     </Wrapper>
@@ -25,11 +29,18 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   padding: 20px;
-  text-align: center;
-
   color: #034c4ce4;
+  h1 {
+    font-size: 30px;
+  }
+  hr {
+    position: relative;
+    left: -50px;
+    width: 900px;
+  }
   section {
     width: 800px;
+    margin: 0 auto;
     word-break: break-all;
     input {
       border: none;
@@ -53,5 +64,18 @@ const Wrapper = styled.div`
   background-color: #fff;
   margin: 0 auto;
 `;
-
+const QuizSettings = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  & span {
+    color: #d90f0fe0;
+    font-size: 25px;
+    padding-top: 7px;
+  }
+  & p {
+    font-size: 14px;
+    color: #f11919e4;
+  }
+`;
 export default HeadOfTestingForm;

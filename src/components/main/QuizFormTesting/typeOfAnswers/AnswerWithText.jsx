@@ -1,13 +1,15 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import FlexBox from "../../../UI/Flexbox";
+import { testingActions } from "../../../../store/testingSlice";
 
-export const AnswerWithText = (id, onBlur, onChange, defaultValue) => {
+export const AnswerWithText = (id, question) => {
   const dispatch = useDispatch();
   const textAnswerRef = useRef();
   const saveTextAnswerHandler = () => {
-    //
+    let enteredValue = textAnswerRef.current.value
+    dispatch(testingActions.saveInputsValue({ question, enteredValue }));
+    textAnswerRef.current.value = "";
   };
   return (
     <Wrapper>
