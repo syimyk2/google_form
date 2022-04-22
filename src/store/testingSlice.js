@@ -13,8 +13,9 @@ const initialState = {
   checking: {
     quantity: 0,
     point: 0,
-    enteredAnswers: []
+    enteredAnswers: [],
   },
+  showScore: false,
 };
 
 export const testingSlice = createSlice({
@@ -28,7 +29,7 @@ export const testingSlice = createSlice({
     },
     gotoNextQuestion(state) {
       if (state.quiz.count === state.quizItems.length) {
-        alert("finsh");
+        state.showScore = true
         return;
       }
       state.quiz = {
@@ -78,7 +79,11 @@ export const testingSlice = createSlice({
     },
     saveInputsValue(state, actions) {
       const { enteredValue, question } = actions.payload;
-       state.checking.enteredAnswers.push({question, answerToQuestion: enteredValue, id: Date.now().toString()})
+      state.checking.enteredAnswers.push({
+        question,
+        answerToQuestion: enteredValue,
+        id: Date.now().toString(),
+      });
     },
   },
 

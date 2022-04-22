@@ -1,8 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Button from "../../UI/Button";
 import { HeadIndicate } from "../QuizeBuilder/QuizeHeaderBuilder";
 
 const HeadOfTestingForm = ({ title, description}) => {
+  const navigate = useNavigate()
+  const goBackToTestsHandler =()=>{
+    navigate("/quiz/quiz-forms" ,{replace: true});
+  }
   return (
     <Wrapper>
       <HeadIndicate />
@@ -19,6 +25,10 @@ const HeadOfTestingForm = ({ title, description}) => {
           <QuizSettings>
             <span>*</span> <p>Обязательный</p>
           </QuizSettings>
+          <div>
+            <Button onClick={goBackToTestsHandler}>GoBack</Button>
+          </div>
+          
         </section>
       </Container>
     </Wrapper>

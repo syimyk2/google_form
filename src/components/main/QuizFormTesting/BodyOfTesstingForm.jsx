@@ -16,14 +16,13 @@ import { saveToLocalStorage } from "../../../utils/helpers/storageHelper";
 import Button from "../../UI/Button";
 import { Indicate } from "../QuizeBuilder/QuizeHeaderBuilder";
 import AnswerVariant from "./typeOfAnswers/AnswerVariant";
-import AnswerWitDate from "./typeOfAnswers/AnswerWitDate";
 import { AnswerWithText } from "./typeOfAnswers/AnswerWithText";
-import AnswerWitTime from "./typeOfAnswers/AnswerWithTime";
+import ScorePoints from "./typeOfAnswers/score/ScorePoints";
 import { SingleAnswerWrapper } from "./typeOfAnswers/SingleAnswerWrapper";
 
 const BodyOfTesstingForm = () => {
   const dispatch = useDispatch();
-  const { quizData, quizItems, quiz, checking} = useSelector(
+  const { quizData, quizItems, quiz, checking, showScore } = useSelector(
     (state) => state.testing
   );
   let [answerCount, setAnswerCount] = useState(0);
@@ -34,11 +33,11 @@ const BodyOfTesstingForm = () => {
     }
     dispatch(testingActions.selectAnswerMultupal({ answerId, answerCount }));
   };
-  const selectOneAnswerHandler = (answerId,selectedVariant ) => {
-    if(selectedVariant.isVariantCorrect){
-      setAnswerCount(prev=>prev+1)
+  const selectOneAnswerHandler = (answerId, selectedVariant) => {
+    if (selectedVariant.isVariantCorrect) {
+      setAnswerCount((prev) => prev + 1);
     }
-    dispatch(testingActions.selectAnswerOneVariant({answerId,answerCount}));
+    dispatch(testingActions.selectAnswerOneVariant({ answerId, answerCount }));
   };
 
   console.log(quiz, checking);
@@ -56,7 +55,9 @@ const BodyOfTesstingForm = () => {
 
   switch (quiz.typeOfQuestion.title) {
     case TEXT:
-      changeableContent = <AnswerWithText id={quiz.id} question={quiz.question} />;
+      changeableContent = (
+        <AnswerWithText id={quiz.id} question={quiz.question} />
+      );
       break;
     case SOMEOFLIST:
       changeableContent = quiz.answerItems.map((question) => (
@@ -85,7 +86,11 @@ const BodyOfTesstingForm = () => {
       break;
     case TIME:
       changeableContent = (
-        <SingleAnswerWrapper title={quiz.typeOfQuestion.title} question={quiz.question} type="time" />
+        <SingleAnswerWrapper
+          title={quiz.typeOfQuestion.title}
+          question={quiz.question}
+          type="time"
+        />
       );
       break;
     case NUMBER:
@@ -102,17 +107,29 @@ const BodyOfTesstingForm = () => {
       break;
     case EMAIL:
       changeableContent = (
-        <SingleAnswerWrapper title={quiz.typeOfQuestion.title} type="email" question={quiz.question} />
+        <SingleAnswerWrapper
+          title={quiz.typeOfQuestion.title}
+          type="email"
+          question={quiz.question}
+        />
       );
       break;
     case DATE:
       changeableContent = (
-        <SingleAnswerWrapper title={quiz.typeOfQuestion.title} type="date" question={quiz.question} />
+        <SingleAnswerWrapper
+          title={quiz.typeOfQuestion.title}
+          type="date"
+          question={quiz.question}
+        />
       );
       break;
     case NAME:
       changeableContent = (
-        <SingleAnswerWrapper title={quiz.typeOfQuestion.title} type="name" question={quiz.question} />
+        <SingleAnswerWrapper
+          title={quiz.typeOfQuestion.title}
+          type="name"
+          question={quiz.question}
+        />
       );
       break;
     default:
@@ -125,29 +142,25 @@ const BodyOfTesstingForm = () => {
     <Wrapper>
       <Indicate className="test-indicate" />
       <Container>
-        <QuestionWrapper>
-          {quiz.isQuestionImportant && <span>*</span>}
-          <h1>{quiz.question}</h1>
-        </QuestionWrapper>
-        <VariantAnswersContainer>
-          {/* {quiz.answerItems.map((question) => (
-            <AnswerVariant
-              key={question.id}
-              id={question.id}
-              onClick={selectAnswerHandler}
-              variant={question.variantValue}
-              checked={true}
-            />
-          ))} */}
-          {/* <AnswerWithText/> */}
-          {/* <AnswerWitDate /> */}
-          {/* <AnswerWitTime/> */}
-          {/* <SingleAnswerWrapper/> */}
-          {changeableContent}
-        </VariantAnswersContainer>
-        <div className="button-container">
-          <Button onClick={goToNexQuestionHandler}>{testButtonValue}</Button>
-        </div>
+        {showScore ? (
+          <ScorePoints />
+        ) : (
+          <>
+            <QuestionWrapper>
+              {quiz.isQuestionImportant && <span>*</span>}
+              <h1>{quiz.question}</h1>
+            </QuestionWrapper>
+
+            <VariantAnswersContainer>
+              {changeableContent}
+            </VariantAnswersContainer>
+            <div className="button-container">
+              <Button onClick={goToNexQuestionHandler}>
+                {testButtonValue}
+              </Button>
+            </div>
+          </>
+        )}
       </Container>
     </Wrapper>
   );
