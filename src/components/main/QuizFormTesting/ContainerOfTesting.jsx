@@ -1,23 +1,24 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import FlexBox from "../../UI/Flexbox";
-import BodyOfTesstingForm from "./BodyOfTesstingForm";
-import HeadOfTestingForm from "./HeadOfTestingForm";
+import React from 'react'
+import { useSelector } from 'react-redux'
+import FlexBox from '../../UI/Flexbox'
+import BodyOfTesstingForm from './BodyOfTesstingForm'
+import HeadOfTestingForm from './HeadOfTestingForm'
 
 const ContainerOfTesting = () => {
-  const dispatch = useDispatch();
-  
+   // const dispatch = useDispatch()
 
-  const { quizData } = useSelector((state) => state.testing);
-  return (
-    <FlexBox direction="column" justify="space-between" margin="0 auto">
-      <HeadOfTestingForm
-        title={quizData.quizTitle}
-        description={quizData.quizDescription}
-      />
-      <BodyOfTesstingForm />
-    </FlexBox>
-  );
-};
+   const { selectedQuiz, quizItems } = useSelector((state) => state.testing)
+   console.log(quizItems)
 
-export default ContainerOfTesting;
+   return (
+      <FlexBox direction="column" justify="space-between" margin="0 auto">
+         <HeadOfTestingForm
+            title={selectedQuiz.quizTitle}
+            description={selectedQuiz.quizDescription}
+         />
+         <BodyOfTesstingForm />
+      </FlexBox>
+   )
+}
+
+export default ContainerOfTesting

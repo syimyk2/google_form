@@ -1,14 +1,13 @@
-import React from "react";
-import QuizeForms from "../main/QuizeForms/QuizeForms";
-import FlexBox from "../UI/Flexbox";
+import React from 'react'
+import QuizeForms from '../main/QuizeForms/QuizeForms'
+import FlexBox from '../UI/Flexbox'
 
 const QuizFormsPage = () => {
-  return (
-    <FlexBox>
-      <QuizeForms/>
-    </FlexBox>
-  );
-};
+   return (
+      <FlexBox>
+         <QuizeForms />
+      </FlexBox>
+   )
+}
 
-export default QuizFormsPage;
-
+export default QuizFormsPage

@@ -1,14 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { formSlice } from "./formSlice";
-import { testingSlice } from "./testingSlice";
+import { configureStore } from '@reduxjs/toolkit'
+import { formSlice } from './formSlice'
+import { testingSlice } from './testingSlice'
 
 const store = configureStore({
-  reducer: {
-   form: formSlice.reducer,
-   testing: testingSlice.reducer,
-       
-  },
-});
+   reducer: {
+      form: formSlice.reducer,
+      testing: testingSlice.reducer,
+   },
+})
 
-export default store;
-
+export default store
