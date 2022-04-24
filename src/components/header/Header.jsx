@@ -4,16 +4,14 @@ import { BiPalette } from 'react-icons/bi'
 import { FiEye } from 'react-icons/fi'
 import { CgProfile } from 'react-icons/cg'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom'
 import logo from '../../assets/icon/logo.svg'
 import { saveQuizFormData } from '../../store/asyncFunctions'
 
 const Header = () => {
    const dispatch = useDispatch()
-   const quizeData = useSelector((state) => state.form.quize)
    const location = useLocation()
-   console.log(quizeData)
    const saveQuizDataHandler = () => {
       dispatch(saveQuizFormData())
    }
@@ -32,7 +30,7 @@ const Header = () => {
             <HeaderSettings>
                <BiPalette onClick={changeThemeHandler} />
                <FiEye />
-               {location.pathname === '/quiz/quiz-create' ? (
+               {location.pathname === '/quiz-create' ? (
                   <button onClick={saveQuizDataHandler}>Сохранить</button>
                ) : (
                   ''
@@ -45,8 +43,9 @@ const Header = () => {
          <Nav>
             <ul>
                <NavLink
+                  end
                   className={({ isActive }) => (isActive ? 'activeLink' : '')}
-                  to="quiz-create"
+                  to="/quiz-create"
                >
                   Вопросы
                </NavLink>
