@@ -8,8 +8,8 @@ import { BiText } from 'react-icons/bi'
 import { BsCardImage } from 'react-icons/bs'
 import { GrChapterAdd } from 'react-icons/gr'
 import { useDispatch } from 'react-redux'
-import { formActions } from '../../../../store/formSlice'
-import { ANSWER_SETTINGS } from '../SelectModal'
+import { formActions } from '../../../../../store/formSlice'
+import { ANSWER_SETTINGS } from '../select/SelectModal'
 
 const StyledToolBar = styled.div`
    display: flex;

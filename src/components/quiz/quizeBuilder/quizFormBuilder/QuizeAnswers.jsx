@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { MdDateRange } from 'react-icons/md'
 import { IoMdTime } from 'react-icons/io'
 import { useDispatch } from 'react-redux'
-import useInput from '../../../hooks/useInput'
-import { formActions } from '../../../store/formSlice'
+import useInput from '../../../../hooks/useInput'
+import { formActions } from '../../../../store/formSlice'
 import { Variant } from './AnswerItem'
 import VariantAdder from './VariantAdder'
 import {
@@ -15,7 +15,7 @@ import {
    SOMEOFLIST,
    TEXT,
    TIME,
-} from '../../../utils/constants/general'
+} from '../../../../utils/constants/general'
 
 const QuizeAnswers = ({
    quizeFormId,

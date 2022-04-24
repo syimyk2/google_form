@@ -2,10 +2,10 @@ import React from 'react'
 import { MdOutlineImage } from 'react-icons/md'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
-import Select from './Select'
+import Select from './select/Select'
 import QuizeAnswers from './QuizeAnswers'
-import useInput from '../../../hooks/useInput'
-import { formActions } from '../../../store/formSlice'
+import useInput from '../../../../hooks/useInput'
+import { formActions } from '../../../../store/formSlice'
 
 const QuizeForm = ({
    quizeFormId,
@@ -21,7 +21,6 @@ const QuizeForm = ({
    //  ---------------------------------------------------
 
    const saveQuestionValueHandler = (formId) => {
-      console.log(formId, questionValue)
       dispatch(formActions.addFormQuestion({ formId, questionValue }))
    }
 
@@ -38,7 +37,7 @@ const QuizeForm = ({
                   type="text"
                   onChange={questionChange}
                   onBlur={() => saveQuestionValueHandler(quizeFormId)}
-                  defaultValue={question}
+                  defaultValue={question || 'Вопрос без заголовка'}
                />
                <span className="highlight" />
                <span className="bar" />

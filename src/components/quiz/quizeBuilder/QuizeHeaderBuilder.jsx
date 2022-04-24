@@ -7,7 +7,6 @@ import FlexBox from '../../UI/Flexbox'
 export const QuizeHeaderBuilder = () => {
    const dispatch = useDispatch()
    const quiz = useSelector((state) => state.form.quize)
-   // console.log(quiz);
 
    const QuizTitleRef = useRef()
    const QuizDescriptionRef = useRef()

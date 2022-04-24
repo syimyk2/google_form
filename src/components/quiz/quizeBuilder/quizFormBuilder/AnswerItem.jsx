@@ -23,7 +23,7 @@ export const Variant = ({
                type={type}
                className={'answer-checkbox' || className}
                onChange={() => onChecked(formId, id)}
-               checked={checked}
+               checked={checked || false}
             />
             <input
                className="input"

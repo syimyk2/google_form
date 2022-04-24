@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Indicate } from './QuizeHeaderBuilder'
+import { Indicate } from '../QuizeHeaderBuilder'
 import QuizeForm from './QuizeForm'
-import QuizeBuilderFooter from './QuizeBuilderFooter'
+import QuizeBuilderFooter from '../QuizeBuilderFooter'
 
-const QuizeBuilder = ({
+export const QuizeQuestionBuilder = ({
    quizeFormId,
    quizeFormAnswerItems,
    isQuestionImportant,
@@ -29,7 +29,6 @@ const QuizeBuilder = ({
       </QuizeWrapper>
    )
 }
-export default QuizeBuilder
 
 const QuizeWrapper = styled.div`
    box-sizing: border-box;

@@ -2,15 +2,15 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import ReactDOM from 'react-dom'
 import { useDispatch } from 'react-redux'
-import { formActions } from '../../../store/formSlice'
-import email from '../../../assets/icon/email.svg'
-import time from '../../../assets/icon/time.svg'
-import date from '../../../assets/icon/date.svg'
-import check from '../../../assets/icon/check.svg'
-import radio from '../../../assets/icon/radio.svg'
-import text from '../../../assets/icon/text-icon.svg'
-import name from '../../../assets/icon/name.svg'
-import phone from '../../../assets/icon/phone.svg'
+import { formActions } from '../../../../../store/formSlice'
+import email from '../../../../../assets/icon/email.svg'
+import time from '../../../../../assets/icon/time.svg'
+import date from '../../../../../assets/icon/date.svg'
+import check from '../../../../../assets/icon/check.svg'
+import radio from '../../../../../assets/icon/radio.svg'
+import text from '../../../../../assets/icon/text-icon.svg'
+import name from '../../../../../assets/icon/name.svg'
+import phone from '../../../../../assets/icon/phone.svg'
 import {
    DATE,
    EMAIL,
@@ -20,7 +20,7 @@ import {
    SOMEOFLIST,
    TEXT,
    TIME,
-} from '../../../utils/constants/general'
+} from '../../../../../utils/constants/general'
 
 export const ANSWER_SETTINGS = [
    { id: '00i176', icon: radio, title: ONEOFLIST },

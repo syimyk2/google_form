@@ -6,8 +6,8 @@ import { CgProfile } from 'react-icons/cg'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { useDispatch } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom'
-import logo from '../../assets/icon/logo.svg'
-import { saveQuizFormData } from '../../store/asyncFunctions'
+import logo from '../../../assets/icon/logo.svg'
+import { saveQuizFormData } from '../../../store/asyncFunctions'
 
 const Header = () => {
    const dispatch = useDispatch()

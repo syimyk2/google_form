@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { saveToLocalStorage } from '../../utils/helpers/storageHelper'
-import QuizeBuilder from './QuizeBuilder/QuizeBuilder'
-import { QuizeHeaderBuilder } from './QuizeBuilder/QuizeHeaderBuilder'
-import { ToolBar } from './QuizeBuilder/toolbar/ToolBar'
+import { QuizeHeaderBuilder } from './quizeBuilder/QuizeHeaderBuilder'
+import { QuizeQuestionBuilder } from './quizeBuilder/quizFormBuilder/QuizeQuestionBuilder'
+import { ToolBar } from './quizeBuilder/quizFormBuilder/toolbar/ToolBar'
 
 const Main = () => {
    const { quize } = useSelector((state) => state.form)
@@ -17,7 +17,7 @@ const Main = () => {
             <QuizeHeaderBuilder />
             <ToolBar />
             {quize.quizeForms.map((quizeForm) => (
-               <QuizeBuilder
+               <QuizeQuestionBuilder
                   key={quizeForm.id}
                   quizeFormId={quizeForm.id}
                   quizeFormAnswerItems={quizeForm.answerItems}
