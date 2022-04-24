@@ -1,30 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { BiPalette } from 'react-icons/bi'
 import { FiEye } from 'react-icons/fi'
 import { CgProfile } from 'react-icons/cg'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { useDispatch } from 'react-redux'
+import { MdCloudDone } from 'react-icons/md'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom'
-import logo from '../../../assets/icon/logo.svg'
+import { ReactComponent as FormLogo } from '../../../assets/icons/logo.svg'
 import { saveQuizFormData } from '../../../store/asyncFunctions'
+import { formActions } from '../../../store/formSlice'
+// import { removeFromLocalStorage } from '../../../utils/helpers/storageHelper'
 
 const Header = () => {
+   const status = useSelector((state) => state.form.status)
+   const [showSavedIcon, setShowSavedIcon] = useState(false)
    const dispatch = useDispatch()
    const location = useLocation()
    const saveQuizDataHandler = () => {
       dispatch(saveQuizFormData())
+      dispatch(formActions.saveQuizData())
+      // removeFromLocalStorage('@quiz-data')
    }
    const changeThemeHandler = () => {
       alert(
          'sorry , temproary this functionalyty do not works , will fix soon (gobal styled)'
       )
    }
+   if (status === 'resolved') {
+      setShowSavedIcon(true)
+   }
+
    return (
       <HeaderWrapper>
          <FirsHeaderWrapper>
             <Logo>
-               <img src={logo} alt="logo" />
+               <FormLogo />
                <span>Новая форма</span>
             </Logo>
             <HeaderSettings>
@@ -35,6 +46,8 @@ const Header = () => {
                ) : (
                   ''
                )}
+               {showSavedIcon && <MdCloudDone />}
+
                <BsThreeDotsVertical />
                <CgProfile />
             </HeaderSettings>
@@ -63,7 +76,7 @@ const Header = () => {
 export default Header
 
 const HeaderWrapper = styled.header`
-   height: 120px;
+   height: 110px;
    display: flex;
    flex-direction: column;
    justify-content: space-between;
@@ -83,9 +96,10 @@ const Logo = styled.div`
    width: 200px;
    justify-content: space-evenly;
 
-   img {
+   svg {
       width: 30px;
       cursor: pointer;
+      height: 47px;
    }
 `
 const HeaderSettings = styled.div`

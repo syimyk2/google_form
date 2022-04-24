@@ -1,13 +1,6 @@
 import styled from 'styled-components'
-import {
-   AiOutlinePlusCircle,
-   AiOutlineImport,
-   AiOutlineVideoCameraAdd,
-} from 'react-icons/ai'
-import { BiText } from 'react-icons/bi'
-import { BsCardImage } from 'react-icons/bs'
-import { GrChapterAdd } from 'react-icons/gr'
 import { useDispatch } from 'react-redux'
+import { ReactComponent as PlusGoogle } from '../../../../../assets/icons/plus.svg'
 import { formActions } from '../../../../../store/formSlice'
 import { ANSWER_SETTINGS } from '../select/SelectModal'
 
@@ -15,25 +8,27 @@ const StyledToolBar = styled.div`
    display: flex;
    position: fixed;
    z-index: 5;
-   left: 1100px;
-   top: 120px;
+   left: 1150px;
+   top: 400px;
    justify-content: center;
-   flex-direction: column;
    align-items: center;
-   justify-content: space-around;
-   width: 50px;
-   height: 250px;
-   border-radius: 10px;
+   width: 95px;
+   height: 95px;
+   border-radius: 50%;
    background-color: white;
-   svg {
-      width: 50px;
-      color: #4d4949;
-      font-size: 22px;
+   box-shadow: 0px 5px 10px 6px rgba(34, 60, 80, 0.2);
+   & svg {
+      font-size: 100px;
       cursor: pointer;
+      background: transparent;
+      :hover {
+         width: 90px;
+         height: 90px;
+      }
    }
-   svg:hover {
-      background-color: #80808038;
-      color: #32024d;
+   & :hover {
+      width: 60px;
+      height: 60px;
    }
 `
 
@@ -41,7 +36,7 @@ export const ToolBar = () => {
    const dispatch = useDispatch()
    const addNewQuestionForm = () => {
       const quizeForm = {
-         id: Math.random().toString(),
+         id: Date.now().toString(),
          isQuestionImportant: false,
          typeOfQuestion: ANSWER_SETTINGS[0],
       }
@@ -49,12 +44,7 @@ export const ToolBar = () => {
    }
    return (
       <StyledToolBar>
-         <AiOutlinePlusCircle onClick={addNewQuestionForm} />
-         <AiOutlineImport />
-         <BiText />
-         <BsCardImage />
-         <AiOutlineVideoCameraAdd />
-         <GrChapterAdd />
+         <PlusGoogle onClick={addNewQuestionForm} />
       </StyledToolBar>
    )
 }

@@ -6,7 +6,7 @@ import { QuizeHeaderBuilder } from './quizeBuilder/QuizeHeaderBuilder'
 import { QuizeQuestionBuilder } from './quizeBuilder/quizFormBuilder/QuizeQuestionBuilder'
 import { ToolBar } from './quizeBuilder/quizFormBuilder/toolbar/ToolBar'
 
-const Main = () => {
+const QuizBuilder = () => {
    const { quize } = useSelector((state) => state.form)
    useEffect(() => {
       saveToLocalStorage('@quiz-data', quize)
@@ -45,4 +45,4 @@ const Container = styled.main`
    width: 800px;
    margin: 0 auto;
 `
-export default Main
+export default QuizBuilder
