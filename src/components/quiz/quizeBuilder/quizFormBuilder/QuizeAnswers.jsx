@@ -12,6 +12,7 @@ import {
    EMAIL,
    NAME,
    NUMBER,
+   ONEOFLIST,
    SOMEOFLIST,
    TEXT,
    TIME,
@@ -29,7 +30,7 @@ const QuizeAnswers = ({
 
    const addVariantItemHandler = (formId) => {
       const quizeVariants = {
-         id: Math.random().toString(),
+         id: Date.now().toString(),
          variantValue: '',
          isVariantCorrect: false,
       }
@@ -50,99 +51,111 @@ const QuizeAnswers = ({
    // ----------------Change answer form ---------------------
    let changebleForm
 
-   if (typeOfQuestion.title === TEXT) {
-      changebleForm = (
-         <AnswerWithText>
-            <span>Текстовый ответ</span>
-         </AnswerWithText>
-      )
-   } else if (typeOfQuestion.title === NUMBER) {
-      changebleForm = (
-         <AnswerWithDate>
-            <span>{typeOfQuestion.title}</span>
-            <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
-         </AnswerWithDate>
-      )
-   } else if (typeOfQuestion.title === EMAIL) {
-      changebleForm = (
-         <AnswerWithDate>
-            <span>{typeOfQuestion.title}</span>
-            <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
-         </AnswerWithDate>
-      )
-   } else if (typeOfQuestion.title === TIME) {
-      changebleForm = (
-         <AnswerWithDate>
-            <span>{typeOfQuestion.title}</span> <IoMdTime fontSize={20} />
-         </AnswerWithDate>
-      )
-   } else if (typeOfQuestion.title === NAME) {
-      changebleForm = (
-         <AnswerWithDate>
-            <span>{typeOfQuestion.title}</span>
-            <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
-         </AnswerWithDate>
-      )
-   } else if (typeOfQuestion.title === DATE) {
-      changebleForm = (
-         <AnswerWithDate>
-            <span>День, месяц, год</span>
-            <MdDateRange fontSize="20px" color="grey" />
-         </AnswerWithDate>
-      )
-   } else if (typeOfQuestion.title === SOMEOFLIST) {
-      changebleForm = (
-         <>
-            {quizeFormAnswerItems.map((quizeFormAnswerItem) => (
-               <Variant
-                  type="checkbox"
-                  placeholder={quizeFormAnswerItem.count}
-                  key={quizeFormAnswerItem.id}
-                  id={quizeFormAnswerItem.id}
-                  formId={quizeFormId}
-                  onChange={variantChange}
-                  value={variantValue}
-                  defaultValue={quizeFormAnswerItem.variantValue}
-                  onBlur={saveVariantValueHandler}
-                  onDelete={deleteVariantItemHandler}
-                  onChecked={selctAsAcorrectVariantHandler}
-                  checked={quizeFormAnswerItem.isVariantCorrect}
-               />
-            ))}
+   switch (typeOfQuestion.title) {
+      case TEXT:
+         changebleForm = (
+            <AnswerWithText>
+               <span>Текстовый ответ</span>
+            </AnswerWithText>
+         )
+         break
+      case NUMBER:
+         changebleForm = (
+            <AnswerWithDate>
+               <span>{typeOfQuestion.title}</span>
+               <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
+            </AnswerWithDate>
+         )
+         break
+      case EMAIL:
+         changebleForm = (
+            <AnswerWithDate>
+               <span>{typeOfQuestion.title}</span>
+               <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
+            </AnswerWithDate>
+         )
+         break
+      case TIME:
+         changebleForm = (
+            <AnswerWithDate>
+               <span>{typeOfQuestion.title}</span> <IoMdTime fontSize={20} />
+            </AnswerWithDate>
+         )
+         break
+      case NAME:
+         changebleForm = (
+            <AnswerWithDate>
+               <span>{typeOfQuestion.title}</span>
+               <img src={typeOfQuestion.icon} alt={typeOfQuestion.title} />
+            </AnswerWithDate>
+         )
+         break
+      case DATE:
+         changebleForm = (
+            <AnswerWithDate>
+               <span>День, месяц, год</span>
+               <MdDateRange fontSize="20px" color="grey" />
+            </AnswerWithDate>
+         )
+         break
+      case SOMEOFLIST:
+         changebleForm = (
+            <>
+               {quizeFormAnswerItems.map((quizeFormAnswerItem) => (
+                  <Variant
+                     type="checkbox"
+                     placeholder={quizeFormAnswerItem.count}
+                     key={quizeFormAnswerItem.id}
+                     id={quizeFormAnswerItem.id}
+                     formId={quizeFormId}
+                     onChange={variantChange}
+                     value={variantValue}
+                     defaultValue={quizeFormAnswerItem.variantValue}
+                     onBlur={saveVariantValueHandler}
+                     onDelete={deleteVariantItemHandler}
+                     onChecked={selctAsAcorrectVariantHandler}
+                     checked={quizeFormAnswerItem.isVariantCorrect}
+                  />
+               ))}
 
-            <VariantAdder
-               type="checkbox"
-               onClick={addVariantItemHandler}
-               id={quizeFormId}
-            />
-         </>
-      )
-   } else {
-      changebleForm = (
-         <>
-            {quizeFormAnswerItems.map((quizeFormAnswerItem) => (
-               <Variant
-                  key={quizeFormAnswerItem.id}
-                  id={quizeFormAnswerItem.id}
-                  placeholder={quizeFormAnswerItem.count}
-                  formId={quizeFormId}
-                  onChange={variantChange}
-                  defaultValue={quizeFormAnswerItem.variantValue}
-                  value={variantValue}
-                  onBlur={saveVariantValueHandler}
-                  onDelete={deleteVariantItemHandler}
-                  type="radio"
-                  onChecked={selctAsAcorrectVariantHandler}
-                  checked={quizeFormAnswerItem.isVariantCorrect}
+               <VariantAdder
+                  type="checkbox"
+                  onClick={addVariantItemHandler}
+                  id={quizeFormId}
                />
-            ))}
-            <VariantAdder
-               onClick={addVariantItemHandler}
-               type="radio"
-               id={quizeFormId}
-            />
-         </>
-      )
+            </>
+         )
+         break
+      case ONEOFLIST:
+         changebleForm = (
+            <>
+               {quizeFormAnswerItems.map((quizeFormAnswerItem) => (
+                  <Variant
+                     key={quizeFormAnswerItem.id}
+                     id={quizeFormAnswerItem.id}
+                     placeholder={quizeFormAnswerItem.count}
+                     formId={quizeFormId}
+                     onChange={variantChange}
+                     defaultValue={quizeFormAnswerItem.variantValue}
+                     value={variantValue}
+                     onBlur={saveVariantValueHandler}
+                     onDelete={deleteVariantItemHandler}
+                     type="radio"
+                     onChecked={selctAsAcorrectVariantHandler}
+                     checked={quizeFormAnswerItem.isVariantCorrect}
+                  />
+               ))}
+               <VariantAdder
+                  onClick={addVariantItemHandler}
+                  type="radio"
+                  id={quizeFormId}
+               />
+            </>
+         )
+         break
+      default:
+         ;<p>Не найдено</p>
+         break
    }
 
    return <QuzeAnswersContainer>{changebleForm}</QuzeAnswersContainer>

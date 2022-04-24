@@ -9,7 +9,14 @@ const initialState = {
    quize: localData || {
       quizTitle: '',
       quizDescription: '',
-      quizeForms: [],
+      quizeForms: [
+         {
+            answerItems: [],
+            isQuestionImportant: false,
+            question: '',
+            typeOfQuestion: {},
+         },
+      ],
    },
    answersSettings: [],
 }
@@ -36,7 +43,7 @@ export const formSlice = createSlice({
             ...state.quize.quizeForms,
             {
                ...actions.payload,
-               answerItems: [{ id: Math.random().toString() }],
+               answerItems: [{ id: Date.now().toString() }],
             },
          ]
       },
