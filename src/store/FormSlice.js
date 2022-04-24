@@ -1,12 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { SOMEOFLIST } from '../utils/constants/general'
 import { getFromLocalStorage } from '../utils/helpers/storageHelper'
+import { saveQuizFormData } from './asyncFunctions'
 
 const localData = getFromLocalStorage('@quiz-data')
 const initialState = {
    status: 'pending',
    quize: localData || {
-      quizeForms: [],
+      quizTitle: '',
+      quizDescription: '',
+      quizeForms: [
+         {
+            answerItems: [],
+            isQuestionImportant: false,
+            question: '',
+            typeOfQuestion: {},
+         },
+      ],
    },
    answersSettings: [],
 }
@@ -21,9 +31,11 @@ export const formSlice = createSlice({
          state.quize.quizTitle = quizTitleValue
          state.quize.quizDescription = quizDescriptionValue
       },
-      // saveQuizData(state, actions) {
-      //    // state.quize.quizeForms = state.quizeForms;
-      // },
+      saveQuizData(state) {
+         state.quize.quizeForms = []
+         state.quize.quizTitle = ''
+         state.quize.quizDescription = ''
+      },
 
       // ---------forms actions-----
       addQuizForm(state, actions) {
@@ -31,7 +43,7 @@ export const formSlice = createSlice({
             ...state.quize.quizeForms,
             {
                ...actions.payload,
-               answerItems: [{ id: Math.random().toString() }],
+               answerItems: [{ id: Date.now().toString() }],
             },
          ]
       },
@@ -157,6 +169,11 @@ export const formSlice = createSlice({
       },
       addSettings(state, actions) {
          state.answersSettings = [...actions.payload]
+      },
+   },
+   extraReducers: {
+      [saveQuizFormData.fulfilled]: (state) => {
+         state.status = 'resolved'
       },
    },
 })

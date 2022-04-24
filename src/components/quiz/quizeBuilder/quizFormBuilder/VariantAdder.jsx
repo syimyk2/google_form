@@ -14,7 +14,7 @@ const VariantAdder = ({ onClick, type, id }) => {
             />
          </form>
          <span>или</span>
-         <span className="btn-other">добавить вариант &quotДругое&quot</span>
+         <span className="btn-other">добавить вариант &#34;Другое&#34;</span>
       </AnswerAdder>
    )
 }

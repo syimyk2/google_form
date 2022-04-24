@@ -15,18 +15,17 @@ const Loading = () => {
 export default Loading
 
 const LoadingFigure = styled.figure`
-   & {
-      border-radius: 100%;
-      width: 2em;
-      height: 2em;
-      position: fixed;
-      margin: auto;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      animation: colours 7s steps(1, start) infinite;
-   }
+   border-radius: 100%;
+   width: 2em;
+   height: 2em;
+   position: fixed;
+   margin: auto;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   animation: colours 7s steps(1, start) infinite;
+   z-index: 100;
 
    .dot {
       position: absolute;

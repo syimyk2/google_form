@@ -7,7 +7,6 @@ import FlexBox from '../../UI/Flexbox'
 export const QuizeHeaderBuilder = () => {
    const dispatch = useDispatch()
    const quiz = useSelector((state) => state.form.quize)
-   // console.log(quiz);
 
    const QuizTitleRef = useRef()
    const QuizDescriptionRef = useRef()
@@ -16,7 +15,7 @@ export const QuizeHeaderBuilder = () => {
       const QuizHeaderData = {
          quizTitleValue: QuizTitleRef.current.value,
          quizDescriptionValue: QuizDescriptionRef.current.value,
-         id: Math.random().toString(),
+         id: Date.now().toString(),
       }
       dispatch(formActions.saveQuizTitileAndDescription(QuizHeaderData))
    }
@@ -31,7 +30,7 @@ export const QuizeHeaderBuilder = () => {
                   <textarea
                      className="big-textarea"
                      ref={QuizTitleRef}
-                     defaultValue={quiz.title || 'Новая форма'}
+                     defaultValue={quiz.quizTitle || 'Новая форма'}
                      onFocus={(e) => e.target.select()}
                      onBlur={saveTextareaValueHandler}
                      name="form-title"
@@ -43,7 +42,7 @@ export const QuizeHeaderBuilder = () => {
                   <textarea
                      className="little-textarea"
                      ref={QuizDescriptionRef}
-                     defaultValue={quiz.description || 'Описание'}
+                     defaultValue={quiz.quizDescription || 'Описание'}
                      onFocus={(e) => e.target.select()}
                      onBlur={saveTextareaValueHandler}
                      name="description"

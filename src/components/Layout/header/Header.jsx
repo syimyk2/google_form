@@ -1,42 +1,63 @@
-import React from 'react'
+// import React, { useState } from 'react'
 import styled from 'styled-components'
 import { BiPalette } from 'react-icons/bi'
 import { FiEye } from 'react-icons/fi'
 import { CgProfile } from 'react-icons/cg'
 import { BsThreeDotsVertical } from 'react-icons/bs'
+import { MdCloudDone } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom'
-import logo from '../../assets/icon/logo.svg'
-import { saveQuizFormData } from '../../store/asyncFunctions'
+import { useState, useEffect } from 'react'
+import { ReactComponent as FormLogo } from '../../../assets/icons/logo.svg'
+import { saveQuizFormData } from '../../../store/asyncFunctions'
+import { formActions } from '../../../store/formSlice'
+import { removeFromLocalStorage } from '../../../utils/helpers/storageHelper'
 
 const Header = () => {
+   const status = useSelector((state) => state.form.status)
+   const [showSavedIcon, setShowSavedIcon] = useState(false)
    const dispatch = useDispatch()
-   const quizeData = useSelector((state) => state.form.quize)
    const location = useLocation()
-   console.log(quizeData)
    const saveQuizDataHandler = () => {
       dispatch(saveQuizFormData())
+      removeFromLocalStorage('@quiz-data')
+      dispatch(formActions.saveQuizData())
    }
    const changeThemeHandler = () => {
       alert(
          'sorry , temproary this functionalyty do not works , will fix soon (gobal styled)'
       )
    }
+
+   useEffect(() => {
+      if (status === 'resolved') {
+         setShowSavedIcon(true)
+      }
+      const timer = setTimeout(() => {
+         setShowSavedIcon(false)
+      }, 4000)
+      return () => {
+         clearTimeout(timer)
+      }
+   }, [setShowSavedIcon, status])
+
    return (
       <HeaderWrapper>
          <FirsHeaderWrapper>
             <Logo>
-               <img src={logo} alt="logo" />
+               <FormLogo />
                <span>Новая форма</span>
             </Logo>
             <HeaderSettings>
                <BiPalette onClick={changeThemeHandler} />
                <FiEye />
-               {location.pathname === '/quiz/quiz-create' ? (
+               {location.pathname === '/' ? (
                   <button onClick={saveQuizDataHandler}>Сохранить</button>
                ) : (
                   ''
                )}
+               {showSavedIcon && <MdCloudDone />}
+
                <BsThreeDotsVertical />
                <CgProfile />
             </HeaderSettings>
@@ -45,8 +66,9 @@ const Header = () => {
          <Nav>
             <ul>
                <NavLink
+                  end
                   className={({ isActive }) => (isActive ? 'activeLink' : '')}
-                  to="quiz-create"
+                  to="/"
                >
                   Вопросы
                </NavLink>
@@ -64,7 +86,7 @@ const Header = () => {
 export default Header
 
 const HeaderWrapper = styled.header`
-   height: 120px;
+   height: 110px;
    display: flex;
    flex-direction: column;
    justify-content: space-between;
@@ -84,9 +106,10 @@ const Logo = styled.div`
    width: 200px;
    justify-content: space-evenly;
 
-   img {
+   svg {
       width: 30px;
       cursor: pointer;
+      height: 47px;
    }
 `
 const HeaderSettings = styled.div`

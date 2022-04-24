@@ -1,5 +1,5 @@
 import React from 'react'
-import QuizeForms from '../main/QuizeForms/QuizeForms'
+import QuizeForms from '../quiz/quizes/QuizeForms'
 import FlexBox from '../UI/Flexbox'
 
 const QuizFormsPage = () => {

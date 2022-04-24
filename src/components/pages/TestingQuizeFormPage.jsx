@@ -1,5 +1,5 @@
 import React from 'react'
-import ContainerOfTesting from '../main/QuizFormTesting/ContainerOfTesting'
+import ContainerOfTesting from '../quiz/QuizFormTesting/ContainerOfTesting'
 import FlexBox from '../UI/Flexbox'
 
 const TestingQuizeFormPage = () => {
