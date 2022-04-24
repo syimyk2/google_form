@@ -2,18 +2,23 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { MdDeleteForever } from 'react-icons/md'
 import { testingActions } from '../../../store/testingSlice'
 import { saveToLocalStorage } from '../../../utils/helpers/storageHelper'
 import Button from '../../UI/Button'
 import { HeadIndicate } from '../quizeBuilder/QuizeHeaderBuilder'
+import { deleteQuizFormData } from '../../../store/asyncFunctions'
 
 const QuizeFormTest = ({ id, quiz, title, description }) => {
    const dispatch = useDispatch()
    const navigate = useNavigate()
-   const goToTestingQuizeFormHandler = (quizId) => {
+   const goToTestingQuizHandler = (quizId) => {
       navigate(`/testing/${quizId}`)
       dispatch(testingActions.selectQuizTest({ quizId, quiz }))
       saveToLocalStorage('@quiz', quiz)
+   }
+   const deleteQuizHandler = (quizId) => {
+      dispatch(deleteQuizFormData(quizId))
    }
    return (
       <Wrapper>
@@ -28,7 +33,10 @@ const QuizeFormTest = ({ id, quiz, title, description }) => {
                </div>
             </section>
             <div>
-               <Button onClick={() => goToTestingQuizeFormHandler(id)}>
+               <MdDeleteForever onClick={() => deleteQuizHandler(id)} />
+            </div>
+            <div>
+               <Button onClick={() => goToTestingQuizHandler(id)}>
                   Пройти тестирование
                </Button>
             </div>
@@ -49,6 +57,14 @@ const Container = styled.div`
    section {
       width: 500px;
       word-break: break-all;
+   }
+   svg {
+      color: grey;
+      font-size: 25px;
+      cursor: pointer;
+      &:hover {
+         color: #034c4ce4;
+      }
    }
 `
 const Wrapper = styled.div`

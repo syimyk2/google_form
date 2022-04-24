@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 import styled from 'styled-components'
 import { BiPalette } from 'react-icons/bi'
 import { FiEye } from 'react-icons/fi'
 import { CgProfile } from 'react-icons/cg'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { MdCloudDone } from 'react-icons/md'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom'
 import { ReactComponent as FormLogo } from '../../../assets/icons/logo.svg'
 import { saveQuizFormData } from '../../../store/asyncFunctions'
@@ -13,8 +13,8 @@ import { formActions } from '../../../store/formSlice'
 // import { removeFromLocalStorage } from '../../../utils/helpers/storageHelper'
 
 const Header = () => {
-   const status = useSelector((state) => state.form.status)
-   const [showSavedIcon, setShowSavedIcon] = useState(false)
+   // const status = useSelector((state) => state.form.status)
+   // const [showSavedIcon, setShowSavedIcon] = useState(false)
    const dispatch = useDispatch()
    const location = useLocation()
    const saveQuizDataHandler = () => {
@@ -27,9 +27,9 @@ const Header = () => {
          'sorry , temproary this functionalyty do not works , will fix soon (gobal styled)'
       )
    }
-   if (status === 'resolved') {
-      setShowSavedIcon(true)
-   }
+   // if (status === 'resolved') {
+   //    setShowSavedIcon(true)
+   // }
 
    return (
       <HeaderWrapper>
@@ -46,7 +46,7 @@ const Header = () => {
                ) : (
                   ''
                )}
-               {showSavedIcon && <MdCloudDone />}
+               {true && <MdCloudDone />}
 
                <BsThreeDotsVertical />
                <CgProfile />

@@ -37,3 +37,21 @@ export const getQuizFormData = createAsyncThunk(
       }
    }
 )
+export const deleteQuizFormData = createAsyncThunk(
+   'testing/deleteQuizFormData',
+   async (id, { rejectWithValue, dispatch }) => {
+      try {
+         const response = await fetch(`${BASE_URL}/quiz-data/${id}.json`, {
+            method: 'DELETE',
+         })
+         const result = await response.json()
+         if (!response.ok) {
+            throw new Error('Something went wrong with Server Firebase!')
+         }
+         console.log(result)
+         dispatch(getQuizFormData())
+      } catch (error) {
+         rejectWithValue(error.message)
+      }
+   }
+)

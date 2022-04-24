@@ -11,7 +11,7 @@ const ScorePoints = () => {
    const { checking, selectedQuiz } = useSelector((state) => state.testing)
    const navigate = useNavigate()
    const goBackTestsHandler = () => {
-      navigate('/quiz/quiz-forms', { replace: true })
+      navigate('/quiz-create/quiz-forms', { replace: true })
       localStorage.removeItem('@quiz')
       dispatch(testingActions.closeScore())
    }
