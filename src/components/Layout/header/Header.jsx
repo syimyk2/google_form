@@ -5,31 +5,41 @@ import { FiEye } from 'react-icons/fi'
 import { CgProfile } from 'react-icons/cg'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { MdCloudDone } from 'react-icons/md'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { ReactComponent as FormLogo } from '../../../assets/icons/logo.svg'
 import { saveQuizFormData } from '../../../store/asyncFunctions'
 import { formActions } from '../../../store/formSlice'
-// import { removeFromLocalStorage } from '../../../utils/helpers/storageHelper'
+import { removeFromLocalStorage } from '../../../utils/helpers/storageHelper'
 
 const Header = () => {
-   // const status = useSelector((state) => state.form.status)
-   // const [showSavedIcon, setShowSavedIcon] = useState(false)
+   const status = useSelector((state) => state.form.status)
+   const [showSavedIcon, setShowSavedIcon] = useState(false)
    const dispatch = useDispatch()
    const location = useLocation()
    const saveQuizDataHandler = () => {
       dispatch(saveQuizFormData())
+      removeFromLocalStorage('@quiz-data')
       dispatch(formActions.saveQuizData())
-      // removeFromLocalStorage('@quiz-data')
    }
    const changeThemeHandler = () => {
       alert(
          'sorry , temproary this functionalyty do not works , will fix soon (gobal styled)'
       )
    }
-   // if (status === 'resolved') {
-   //    setShowSavedIcon(true)
-   // }
+
+   useEffect(() => {
+      if (status === 'resolved') {
+         setShowSavedIcon(true)
+      }
+      const timer = setTimeout(() => {
+         setShowSavedIcon(false)
+      }, 4000)
+      return () => {
+         clearTimeout(timer)
+      }
+   }, [setShowSavedIcon, status])
 
    return (
       <HeaderWrapper>
@@ -41,12 +51,12 @@ const Header = () => {
             <HeaderSettings>
                <BiPalette onClick={changeThemeHandler} />
                <FiEye />
-               {location.pathname === '/quiz-create' ? (
+               {location.pathname === '/' ? (
                   <button onClick={saveQuizDataHandler}>Сохранить</button>
                ) : (
                   ''
                )}
-               {true && <MdCloudDone />}
+               {showSavedIcon && <MdCloudDone />}
 
                <BsThreeDotsVertical />
                <CgProfile />
@@ -58,7 +68,7 @@ const Header = () => {
                <NavLink
                   end
                   className={({ isActive }) => (isActive ? 'activeLink' : '')}
-                  to="/quiz-create"
+                  to="/"
                >
                   Вопросы
                </NavLink>

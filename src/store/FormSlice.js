@@ -7,6 +7,8 @@ const localData = getFromLocalStorage('@quiz-data')
 const initialState = {
    status: 'pending',
    quize: localData || {
+      quizTitle: '',
+      quizDescription: '',
       quizeForms: [],
    },
    answersSettings: [],
@@ -24,6 +26,8 @@ export const formSlice = createSlice({
       },
       saveQuizData(state) {
          state.quize.quizeForms = []
+         state.quize.quizTitle = ''
+         state.quize.quizDescription = ''
       },
 
       // ---------forms actions-----
