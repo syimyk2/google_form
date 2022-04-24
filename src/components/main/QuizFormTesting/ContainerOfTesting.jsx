@@ -5,10 +5,7 @@ import BodyOfTesstingForm from './BodyOfTesstingForm'
 import HeadOfTestingForm from './HeadOfTestingForm'
 
 const ContainerOfTesting = () => {
-   // const dispatch = useDispatch()
-
-   const { selectedQuiz, quizItems } = useSelector((state) => state.testing)
-   console.log(quizItems)
+   const { selectedQuiz } = useSelector((state) => state.testing)
 
    return (
       <FlexBox direction="column" justify="space-between" margin="0 auto">

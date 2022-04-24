@@ -1,18 +1,20 @@
 import React from 'react'
-// import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { testingActions } from '../../../store/testingSlice'
 import { removeFromLocalStorage } from '../../../utils/helpers/storageHelper'
 import Button from '../../UI/Button'
 import { HeadIndicate } from '../QuizeBuilder/QuizeHeaderBuilder'
 
 const HeadOfTestingForm = ({ title, description }) => {
-   // const dispatch = useDispatch()
+   const dispatch = useDispatch()
 
    const navigate = useNavigate()
    const goBackToTestsHandler = () => {
       navigate('/quiz/quiz-forms', { replace: true })
-      removeFromLocalStorage('@quizs')
+      removeFromLocalStorage('@quiz')
+      dispatch(testingActions.closeScore())
    }
 
    return (

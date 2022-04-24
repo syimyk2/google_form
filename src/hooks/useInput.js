@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'
-import { getFromLocalStorage } from '../utils/helpers/storageHelper'
+import { useState } from 'react'
 
 const useInput = (regexp) => {
    const [enteredValue, setEnteredValue] = useState('')
@@ -7,16 +6,15 @@ const useInput = (regexp) => {
    const enteredNameIsValid = regexp && regexp.test(enteredValue)
 
    const nameInputIsValid = enterdNameTouch && !enteredNameIsValid
-   useEffect(() => {
-      const localData = getFromLocalStorage(enteredValue)
-      setEnteredValue(localData || '')
-   }, [])
 
    const inputBlurHandler = () => {
       setEnteredNameTouch(true)
    }
    const changeInputHandler = (e) => {
       setEnteredValue(e.target.value)
+   }
+   const clearInputValue = () => {
+      setEnteredValue('')
    }
 
    const nameInputClasses = !nameInputIsValid ? '' : 'invalid'
@@ -26,11 +24,11 @@ const useInput = (regexp) => {
       enterdNameTouch,
       enteredNameIsValid,
       nameInputIsValid,
+      nameInputClasses,
       changeInputHandler,
       inputBlurHandler,
+      clearInputValue,
       setEnteredValue,
-      setEnteredNameTouch,
-      nameInputClasses,
    }
 }
 

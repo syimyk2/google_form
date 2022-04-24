@@ -1,16 +1,19 @@
-import React, { useRef } from 'react'
-// import { useDispatch } from 'react-redux'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-// import { testingActions } from '../../../../store/testingSlice'
+import useInput from '../../../../hooks/useInput'
+import { testingActions } from '../../../../store/testingSlice'
 
 export const SingleAnswerWrapper = ({ type, id, title, question }) => {
-   // const dispatch = useDispatch()
-   const inputRef = useRef()
+   const dispatch = useDispatch()
+   const { enteredValue, changeInputHandler, clearInputValue } = useInput()
+
    const saveInputValueHandler = () => {
-      // const enteredValue = inputRef.current.value
-      // dispatch(testingActions.saveInputsValue({ question, enteredValue }))
-      inputRef.current.value = ''
-      console.log(question)
+      if (enteredValue.trim().length === 0) {
+         return
+      }
+      dispatch(testingActions.saveInputsValue({ question, enteredValue }))
+      clearInputValue()
    }
    return (
       <Wrapper type={type}>
@@ -18,7 +21,8 @@ export const SingleAnswerWrapper = ({ type, id, title, question }) => {
          <input
             type={type}
             name="singleanswer"
-            ref={inputRef}
+            onChange={changeInputHandler}
+            value={enteredValue}
             onBlur={saveInputValueHandler}
             id={id}
             required

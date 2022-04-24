@@ -3,19 +3,12 @@ import { createSlice } from '@reduxjs/toolkit'
 import { getFromLocalStorage } from '../utils/helpers/storageHelper'
 import { getQuizFormData } from './asyncFunctions'
 
-// const questionFromLocal = getFromLocalStorage('@question')
-// const questionsFromLocal = getFromLocalStorage('@questions')
-const selectedQuizFromLocal = getFromLocalStorage('@selectedQuiz')
 const selectedQuiz = getFromLocalStorage('@quiz')
-console.log(selectedQuizFromLocal)
 
 const initialState = {
    status: 'pending',
-   error: null,
    quizes: [],
    selectedQuiz: selectedQuiz || {},
-   questions: [],
-   question: {},
    checking: {
       quantity: 0,
       point: 0,
@@ -23,6 +16,8 @@ const initialState = {
    },
    count: 0,
    showScore: false,
+   showAlert: false,
+   isSelectedAnswer: false,
 }
 
 export const testingSlice = createSlice({
@@ -34,15 +29,24 @@ export const testingSlice = createSlice({
          state.selectedQuiz = quiz
       },
       gotoNextQuestion(state) {
-         if (state.count === state.selectedQuiz.quizeForms.length - 1) {
+         const question = state.selectedQuiz.quizeForms
+         if (state.count + 1 === question.length) {
             state.showScore = true
-            return
+            state.count = 0
+         } else if (
+            question[state.count].isQuestionImportant &&
+            !state.isSelectedAnswer
+         ) {
+            state.showAlert = true
+         } else {
+            state.count += 1
          }
-         state.count += 1
       },
       selectAnswerMultupal(state, actions) {
+         const question = state.selectedQuiz.quizeForms
          const { answerId, answerCount } = actions.payload
-         const selectedVariant = state.quiz.answerItems.map((el) => {
+         state.isSelectedAnswer = true
+         const selectedVariant = question[state.count].answerItems.map((el) => {
             if (el.isVariantCorrect && el.id === answerId) {
                // eslint-disable-next-line no-param-reassign
                el.isSelected = true
@@ -50,7 +54,7 @@ export const testingSlice = createSlice({
                   state.checking.quantity += 1
                   state.checking.point += 10
                } else {
-                  state.checking.quantity += 0.1
+                  state.checking.quantity += 0.5
                   state.checking.point += 5
                }
             } else if (el.id === answerId) {
@@ -59,12 +63,12 @@ export const testingSlice = createSlice({
             }
             return el
          })
-         state.quiz.answerItems = selectedVariant
+         question[state.count].answerItems = selectedVariant
       },
       selectAnswerOneVariant(state, actions) {
+         const question = state.selectedQuiz.quizeForms
          const { answerId, answerCount } = actions.payload
-         console.log(answerCount)
-         const selectedVariant = state.quiz.answerItems.map((el) => {
+         const selectedVariant = question[state.count].answerItems.map((el) => {
             // eslint-disable-next-line no-param-reassign
             el.isSelected = false
             if (
@@ -72,6 +76,7 @@ export const testingSlice = createSlice({
                el.id === answerId &&
                answerCount + 1 === 1
             ) {
+               state.isSelectedAnswer = true
                state.checking.quantity += 1
                state.checking.point += 10
                el.isSelected = true
@@ -81,15 +86,24 @@ export const testingSlice = createSlice({
 
             return el
          })
-         state.quiz.answerItems = selectedVariant
+         state.isSelectedAnswer = true
+         question[state.count].answerItems = selectedVariant
       },
       saveInputsValue(state, actions) {
+         state.isSelectedAnswer = true
          const { enteredValue, question } = actions.payload
          state.checking.enteredAnswers.push({
             question,
             answerToQuestion: enteredValue,
             id: Date.now().toString(),
          })
+      },
+      closeScore(state) {
+         state.showScore = false
+      },
+      showAlert(state) {
+         state.isSelectedAnswer = false
+         state.showAlert = false
       },
    },
 

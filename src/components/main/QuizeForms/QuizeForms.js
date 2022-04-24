@@ -2,14 +2,18 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getQuizFormData } from '../../../store/asyncFunctions'
+import { testingActions } from '../../../store/testingSlice'
+import { removeFromLocalStorage } from '../../../utils/helpers/storageHelper'
 import Loading from '../../UI/Loading'
 import QuizeFormTest from './QuizeFormTest'
 
 const QuizeForms = () => {
    const dispatch = useDispatch()
    const { quizes, status } = useSelector((state) => state.testing)
-   // console.log(quizes[0]);
+
    useEffect(() => {
+      removeFromLocalStorage('@quiz')
+      dispatch(testingActions.closeScore())
       dispatch(getQuizFormData())
    }, [])
    const loading = status === 'loading' && <Loading />

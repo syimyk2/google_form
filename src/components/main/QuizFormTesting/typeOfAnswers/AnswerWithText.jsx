@@ -1,15 +1,17 @@
 import React, { useRef } from 'react'
-// import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-// import { testingActions } from '../../../../store/testingSlice'
+import { testingActions } from '../../../../store/testingSlice'
 
 export const AnswerWithText = (id, question) => {
-   // const dispatch = useDispatch()
+   const dispatch = useDispatch()
    const textAnswerRef = useRef()
    const saveTextAnswerHandler = () => {
-      // const enteredValue = textAnswerRef.current.value
-      // dispatch(testingActions.saveInputsValue({ question, enteredValue }))
-      console.log(question)
+      const enteredValue = textAnswerRef.current.value
+      if (enteredValue.trim().length === 0) {
+         return
+      }
+      dispatch(testingActions.saveInputsValue({ question, enteredValue }))
       textAnswerRef.current.value = ''
    }
    return (

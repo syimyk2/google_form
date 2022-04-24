@@ -14,7 +14,7 @@ const AnswerVariant = ({
          <input
             type={type || 'radio'}
             onChange={() => onClick(id, variant)}
-            checked={checked}
+            checked={checked || false}
          />
          <span>{variantValue}</span>
       </VariantWrapper>
