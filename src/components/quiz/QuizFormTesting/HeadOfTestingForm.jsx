@@ -12,7 +12,7 @@ const HeadOfTestingForm = ({ title, description }) => {
 
    const navigate = useNavigate()
    const goBackToTestsHandler = () => {
-      navigate('/quiz-create/quiz-forms', { replace: true })
+      navigate('/quiz-forms', { replace: true })
       removeFromLocalStorage('@quiz')
       dispatch(testingActions.closeScore())
    }
