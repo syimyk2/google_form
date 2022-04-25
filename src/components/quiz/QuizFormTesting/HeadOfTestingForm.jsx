@@ -5,14 +5,14 @@ import styled from 'styled-components'
 import { testingActions } from '../../../store/testingSlice'
 import { removeFromLocalStorage } from '../../../utils/helpers/storageHelper'
 import Button from '../../UI/Button'
-import { HeadIndicate } from '../quizeBuilder/QuizeHeaderBuilder'
+import { HeadIndicate } from '../quizeBuilder/quizBuilderHeader/QuizeHeaderBuilder'
 
 const HeadOfTestingForm = ({ title, description }) => {
    const dispatch = useDispatch()
 
    const navigate = useNavigate()
    const goBackToTestsHandler = () => {
-      navigate('/quiz-create/quiz-forms', { replace: true })
+      navigate('/quiz-forms', { replace: true })
       removeFromLocalStorage('@quiz')
       dispatch(testingActions.closeScore())
    }

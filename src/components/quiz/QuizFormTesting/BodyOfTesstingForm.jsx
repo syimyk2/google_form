@@ -14,10 +14,10 @@ import {
    TIME,
 } from '../../../utils/constants/general'
 import Button from '../../UI/Button'
-import { Indicate } from '../quizeBuilder/QuizeHeaderBuilder'
+import { Indicate } from '../quizeBuilder/quizBuilderHeader/QuizeHeaderBuilder'
 import AnswerVariant from './typeOfAnswers/AnswerVariant'
 import { AnswerWithText } from './typeOfAnswers/AnswerWithText'
-import ScorePoints from './typeOfAnswers/score/ScorePoints'
+import ScorePoints from './score/ScorePoints'
 import { SingleAnswerWrapper } from './typeOfAnswers/SingleAnswerWrapper'
 
 const BodyOfTesstingForm = () => {

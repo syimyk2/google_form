@@ -6,8 +6,8 @@ import { MdDeleteForever } from 'react-icons/md'
 import { testingActions } from '../../../store/testingSlice'
 import { saveToLocalStorage } from '../../../utils/helpers/storageHelper'
 import Button from '../../UI/Button'
-import { HeadIndicate } from '../quizeBuilder/QuizeHeaderBuilder'
 import { deleteQuizFormData } from '../../../store/asyncFunctions'
+import { HeadIndicate } from '../quizeBuilder/quizBuilderHeader/QuizeHeaderBuilder'
 
 const QuizeFormTest = ({ id, quiz, title, description }) => {
    const dispatch = useDispatch()

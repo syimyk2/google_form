@@ -1,6 +1,6 @@
 import React from 'react'
-import ContainerOfTesting from '../quiz/QuizFormTesting/ContainerOfTesting'
-import FlexBox from '../UI/Flexbox'
+import ContainerOfTesting from '../components/quiz/QuizFormTesting/ContainerOfTesting'
+import FlexBox from '../components/UI/Flexbox'
 
 const TestingQuizeFormPage = () => {
    return (

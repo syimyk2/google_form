@@ -2,16 +2,16 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { testingActions } from '../../../../../store/testingSlice'
-import Button from '../../../../UI/Button'
-import FlexBox from '../../../../UI/Flexbox'
+import { testingActions } from '../../../../store/testingSlice'
+import Button from '../../../UI/Button'
+import FlexBox from '../../../UI/Flexbox'
 
 const ScorePoints = () => {
    const dispatch = useDispatch()
    const { checking, selectedQuiz } = useSelector((state) => state.testing)
    const navigate = useNavigate()
    const goBackTestsHandler = () => {
-      navigate('/quiz-create/quiz-forms', { replace: true })
+      navigate('/quiz-forms', { replace: true })
       localStorage.removeItem('@quiz')
       dispatch(testingActions.closeScore())
    }
@@ -26,7 +26,7 @@ const ScorePoints = () => {
                <h2>Your Point {checking.point}</h2>
             </div>
             <div>
-               <Button onClick={goBackTestsHandler}>Go Back to Tests</Button>
+               <Button onClick={goBackTestsHandler}>Go Back to tests</Button>
             </div>
          </WrapperScore>
       </FlexBox>

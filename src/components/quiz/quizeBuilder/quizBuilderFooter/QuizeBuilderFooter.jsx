@@ -4,7 +4,7 @@ import { RiDeleteBin6Line } from 'react-icons/ri'
 import { MdOutlineContentCopy } from 'react-icons/md'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
-import { formActions } from '../../../store/formSlice'
+import { formActions } from '../../../../store/formSlice'
 
 const QuizeBuilderFooter = ({ quizeFormId, isQuestionImportant }) => {
    const dispatch = useDispatch()
