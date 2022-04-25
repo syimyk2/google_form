@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Indicate } from '../QuizeHeaderBuilder'
 import QuizeForm from './QuizeForm'
-import QuizeBuilderFooter from '../QuizeBuilderFooter'
+import QuizeBuilderFooter from '../quizBuilderFooter/QuizeBuilderFooter'
+import { Indicate } from '../quizBuilderHeader/QuizeHeaderBuilder'
 
 export const QuizeQuestionBuilder = ({
    quizeFormId,

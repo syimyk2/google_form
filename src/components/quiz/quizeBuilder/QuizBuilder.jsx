@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { saveToLocalStorage } from '../../utils/helpers/storageHelper'
-import { QuizeHeaderBuilder } from './quizeBuilder/QuizeHeaderBuilder'
-import { QuizeQuestionBuilder } from './quizeBuilder/quizFormBuilder/QuizeQuestionBuilder'
-import { ToolBar } from './quizeBuilder/quizFormBuilder/toolbar/ToolBar'
+import { saveToLocalStorage } from '../../../utils/helpers/storageHelper'
+import { QuizeHeaderBuilder } from './quizBuilderHeader/QuizeHeaderBuilder'
+import { QuizeQuestionBuilder } from './quizFormBuilder/QuizeQuestionBuilder'
+import { ToolBar } from './quizFormBuilder/toolbar/ToolBar'
 
 const QuizBuilder = () => {
    const { quize } = useSelector((state) => state.form)

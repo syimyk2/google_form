@@ -14,7 +14,7 @@ import {
    TIME,
 } from '../../../utils/constants/general'
 import Button from '../../UI/Button'
-import { Indicate } from '../quizeBuilder/QuizeHeaderBuilder'
+import { Indicate } from '../quizeBuilder/quizBuilderHeader/QuizeHeaderBuilder'
 import AnswerVariant from './typeOfAnswers/AnswerVariant'
 import { AnswerWithText } from './typeOfAnswers/AnswerWithText'
 import ScorePoints from './score/ScorePoints'

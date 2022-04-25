@@ -4,7 +4,9 @@ import CreateForms from '../components/pages/CreateForms'
 import NotFoundPage from '../components/pages/NotFoundPage'
 import Loading from '../components/UI/Loading'
 
-const QuizBuilder = React.lazy(() => import('../components/quiz/QuizBuilder'))
+const QuizBuilder = React.lazy(
+   () => import('../components/quiz/quizeBuilder/QuizBuilder')
+)
 const QuizFormsPage = React.lazy(
    () => import('../components/pages/QuizFormsPage')
 )

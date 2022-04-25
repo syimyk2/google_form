@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { formActions } from '../../../store/formSlice'
-import FlexBox from '../../UI/Flexbox'
+import { formActions } from '../../../../store/formSlice'
+import FlexBox from '../../../UI/Flexbox'
 
 export const QuizeHeaderBuilder = () => {
    const dispatch = useDispatch()
