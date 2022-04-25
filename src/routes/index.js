@@ -1,17 +1,15 @@
 import React, { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import CreateForms from '../components/pages/CreateForms'
-import NotFoundPage from '../components/pages/NotFoundPage'
+import NotFoundPage from '../pages/NotFoundPage'
 import Loading from '../components/UI/Loading'
 
+const CreateForms = React.lazy(() => import('../pages/CreateForms'))
 const QuizBuilder = React.lazy(
    () => import('../components/quiz/quizeBuilder/QuizBuilder')
 )
-const QuizFormsPage = React.lazy(
-   () => import('../components/pages/QuizFormsPage')
-)
+const QuizFormsPage = React.lazy(() => import('../pages/QuizFormsPage'))
 const PassingQuizPage = React.lazy(
-   () => import('../components/pages/TestingQuizeFormPage')
+   () => import('../pages/TestingQuizeFormPage')
 )
 export const AppRoutes = () => {
    return (
